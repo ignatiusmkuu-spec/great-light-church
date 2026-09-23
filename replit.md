@@ -8,5 +8,9 @@ Use `node server.js` to serve the site on port 5000. The server serves the stati
 
 - `GET /api/health` — lightweight health check
 - `POST /api/contact` — validates and stores prayer/contact messages in `data/messages.json`
+- `GET /api/events` — public upcoming event feed
+- `/admin` — password-protected event editor for the church team
+
+The admin editor uses the `ADMIN_PASSWORD` secret for sign-in and `SESSION_SECRET` to sign sessions. Published events are stored in `data/events.json` and appear automatically on the homepage.
 
 Images are supplied by the project in `attached_assets/`. The app intentionally has no package dependencies or build step.
