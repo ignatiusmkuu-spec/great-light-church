@@ -119,6 +119,25 @@
       .event-meta i { color: var(--gold); margin-right: 5px; }
       .event-link { color: var(--purple); display: inline-block; font-size: .75rem; font-weight: 700; margin-top: 8px; }
       .events-empty { background: rgba(245,231,188,.35); border: 1px dashed var(--gold); border-radius: var(--radius); color: var(--ink-soft); padding: 27px; text-align: center; }
+      .worship-section { background: var(--paper); padding-top: 0; }
+      .worship-card { align-items: center; background: linear-gradient(120deg, var(--purple-deep), var(--purple)); border-radius: 28px; box-shadow: 0 22px 55px rgba(44,25,64,.18); color: white; display: grid; gap: 36px; grid-template-columns: 1fr auto; overflow: hidden; padding: clamp(28px, 5vw, 54px); position: relative; }
+      .worship-card::after { border: 1px solid rgba(245,231,188,.2); border-radius: 50%; content: ""; height: 270px; position: absolute; right: -85px; top: -100px; width: 270px; }
+      .worship-copy, .player { position: relative; z-index: 1; }
+      .worship-copy h2 { color: white; font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.05; margin: 10px 0 13px; }
+      .worship-copy p { color: #ded3e8; max-width: 540px; }
+      .worship-copy .eyebrow { color: var(--gold-light); }
+      .player { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); border-radius: 18px; min-width: min(100%, 360px); padding: 20px; }
+      .player-top { align-items: center; display: flex; gap: 12px; }
+      .play-button { align-items: center; background: var(--gold); border: 0; border-radius: 50%; color: var(--purple-deep); cursor: pointer; display: flex; flex: 0 0 48px; font-size: 1rem; height: 48px; justify-content: center; transition: transform .25s, box-shadow .25s; width: 48px; }
+      .play-button:hover { box-shadow: 0 0 0 8px rgba(214,169,54,.16); transform: scale(1.05); }
+      .song-title { font-size: .9rem; font-weight: 700; }
+      .song-artist { color: #c9bad7; display: block; font-size: .7rem; margin-top: 3px; }
+      .progress-row { align-items: center; display: flex; gap: 10px; margin-top: 20px; }
+      .progress { accent-color: var(--gold); cursor: pointer; height: 4px; width: 100%; }
+      .time { color: #d9cce3; font-size: .68rem; white-space: nowrap; }
+      .youtube-button { align-items: center; color: var(--gold-light); display: inline-flex; font-size: .77rem; font-weight: 700; gap: 8px; margin-top: 18px; }
+      .youtube-button i { color: #ff5b58; font-size: 1.15rem; }
+      .youtube-button:hover { color: white; }
 
       .quote-section { background: var(--purple); color: white; overflow: hidden; position: relative; }
       .quote-section::before { border: 1px solid rgba(245,231,188,.18); border-radius: 50%; content: ""; height: 430px; position: absolute; right: -120px; top: -180px; width: 430px; }
@@ -206,6 +225,7 @@
         .section-heading { align-items: start; flex-direction: column; }
         .about-grid, .quote-inner, .contact-grid { grid-template-columns: 1fr; }
         .events-grid { grid-template-columns: 1fr; }
+        .worship-card { grid-template-columns: 1fr; }
         .quote-side { border-left: 0; border-top: 1px solid rgba(255,255,255,.25); padding-left: 0; padding-top: 24px; }
         .ministry-grid { grid-template-columns: 1fr; }
         .ministry-side, .ministry-main { min-height: 360px; }
@@ -250,6 +270,7 @@
           <ul class="nav-links" id="navLinks">
             <li><a href="#about">Our story</a></li>
             <li><a href="#gather">Gather with us</a></li>
+            <li><a href="#worship">Worship</a></li>
             <li><a href="#ministries">Ministries</a></li>
             <li><a href="#impact">Our impact</a></li>
             <li><a class="admin-link" href="/admin.html"><i class="fa-solid fa-lock"></i> Admin</a></li>
@@ -317,6 +338,27 @@
           </div>
           <div class="events-grid" id="eventsGrid">
             <div class="events-empty">Loading upcoming events...</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="worship-section" id="worship">
+        <div class="container">
+          <div class="worship-card reveal">
+            <div class="worship-copy">
+              <div class="eyebrow">A song for the journey</div>
+              <h2>Let worship meet you right where you are.</h2>
+              <p>Take a quiet moment, press play, and remember: you are not a slave to fear. There is freedom, grace, and a light that still shines over your life.</p>
+            </div>
+            <div class="player">
+              <audio id="worshipAudio" preload="metadata" src="attached_assets/No_Longer_Slaves_(Official_Lyric_Video)_-_Jonathan_David_and_M_1790153339406.mp3"></audio>
+              <div class="player-top">
+                <button class="play-button" id="playSong" type="button" aria-label="Play No Longer Slaves"><i class="fa-solid fa-play"></i></button>
+                <div><div class="song-title">No Longer Slaves</div><span class="song-artist">Jonathan David &amp; Melissa Helser</span></div>
+              </div>
+              <div class="progress-row"><span class="time" id="currentTime">0:00</span><input class="progress" id="songProgress" type="range" min="0" max="100" value="0" aria-label="Song progress" /><span class="time" id="duration">0:00</span></div>
+              <a class="youtube-button" href="https://www.youtube.com/results?search_query=Great+light+Centre+Langata" target="_blank" rel="noreferrer"><i class="fa-brands fa-youtube"></i> Great light Centre Langata</a>
+            </div>
           </div>
         </div>
       </section>
@@ -392,7 +434,7 @@
       <div class="container">
         <div class="footer-grid">
           <div class="footer-col"><a class="brand" href="#home"><img src="attached_assets/WhatsApp_Image_2026-09-21_at_11.11.57_AM_1790152300387.jpeg" alt="Great Light Centre logo" /><span class="brand-copy"><strong>GREAT LIGHT</strong><span>Centre Ministries</span></span></a><p style="margin-top:18px">A home for faith, hope, and community.</p><div class="socials"><a href="https://wa.me/254722653748" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a><a href="#contact" aria-label="Contact us"><i class="fa-regular fa-envelope"></i></a><a href="#gather" aria-label="Visit us"><i class="fa-solid fa-location-dot"></i></a></div></div>
-          <div class="footer-col"><h3>Explore</h3><a href="#about">Our story</a><a href="#gather">Gather with us</a><a href="#events">Upcoming events</a><a href="#ministries">Ministries</a><a href="#impact">Our impact</a></div>
+          <div class="footer-col"><h3>Explore</h3><a href="#about">Our story</a><a href="#gather">Gather with us</a><a href="#events">Upcoming events</a><a href="#worship">Worship</a><a href="#ministries">Ministries</a><a href="#impact">Our impact</a></div>
           <div class="footer-col"><h3>Connect</h3><a href="tel:+254722653748">+254 722 653 748</a><a href="https://wa.me/254722653748" target="_blank" rel="noreferrer">WhatsApp us</a><a href="#contact">Share a prayer request</a></div>
           <div class="footer-col"><h3>Sunday worship</h3><p>Every Sunday<br />9:00 AM</p><p>Nairobi, Kenya</p><a class="text-link" href="#contact" style="color:var(--gold-light)">Plan your visit <i class="fa-solid fa-arrow-right"></i></a></div>
         </div>
@@ -457,6 +499,31 @@
         }
       };
       loadEvents();
+
+      const audio = document.getElementById("worshipAudio");
+      const playSong = document.getElementById("playSong");
+      const songProgress = document.getElementById("songProgress");
+      const currentTime = document.getElementById("currentTime");
+      const duration = document.getElementById("duration");
+      const formatTime = (seconds) => {
+        if (!Number.isFinite(seconds)) return "0:00";
+        return `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, "0")}`;
+      };
+      playSong.addEventListener("click", async () => {
+        if (audio.paused) {
+          try { await audio.play(); } catch { return; }
+        } else {
+          audio.pause();
+        }
+      });
+      audio.addEventListener("play", () => { playSong.innerHTML = '<i class="fa-solid fa-pause"></i>'; playSong.setAttribute("aria-label", "Pause No Longer Slaves"); });
+      audio.addEventListener("pause", () => { playSong.innerHTML = '<i class="fa-solid fa-play"></i>'; playSong.setAttribute("aria-label", "Play No Longer Slaves"); });
+      audio.addEventListener("loadedmetadata", () => { duration.textContent = formatTime(audio.duration); });
+      audio.addEventListener("timeupdate", () => {
+        currentTime.textContent = formatTime(audio.currentTime);
+        songProgress.value = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+      });
+      songProgress.addEventListener("input", () => { if (audio.duration) audio.currentTime = (Number(songProgress.value) / 100) * audio.duration; });
 
       const lightbox = document.getElementById("lightbox");
       const lightboxImage = document.getElementById("lightboxImage");
