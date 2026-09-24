@@ -53,6 +53,9 @@
       .dashboard.active { display:block; }
       .dashboard-head { align-items:end; display:flex; justify-content:space-between; margin-bottom:22px; }
       .dashboard-head h2 { font-size:1.8rem; }
+      .content-tools { display:grid; gap:20px; grid-template-columns:1fr 1fr; margin-bottom:28px; }
+      .content-tools h2 { font-size:1.45rem; margin-bottom:18px; }
+      .content-tools .panel { height:100%; }
       .event-form { margin-bottom:28px; }
       .event-form h2 { font-size:1.45rem; margin-bottom:20px; }
       .form-actions { align-items:center; display:flex; gap:12px; margin-top:3px; }
@@ -64,7 +67,14 @@
       .event-row-date { color:var(--purple); flex:0 0 110px; font-size:.78rem; font-weight:700; }
       .event-row-actions { display:flex; flex:0 0 auto; gap:8px; }
       .empty { background:rgba(245,231,188,.35); border:1px dashed var(--gold); border-radius:14px; color:var(--muted); padding:25px; text-align:center; }
-      @media (max-width:650px) { .topbar-inner,.dashboard-head { align-items:flex-start; flex-direction:column; gap:16px; } .form-grid { grid-template-columns:1fr; } .event-row { align-items:flex-start; flex-direction:column; } .event-row-date { flex-basis:auto; } .event-row-actions { width:100%; } .event-row-actions .btn { flex:1; } main { padding-top:42px; } }
+      .upload-note { color:var(--muted); font-size:.73rem; margin-top:9px; }
+      .admin-gallery { display:grid; gap:10px; grid-template-columns:repeat(2,1fr); margin-top:18px; }
+      .admin-gallery-item { border:1px solid var(--line); border-radius:10px; overflow:hidden; position:relative; }
+      .admin-gallery-item img { aspect-ratio:1.2; object-fit:cover; width:100%; }
+      .admin-gallery-item div { align-items:center; display:flex; gap:8px; justify-content:space-between; padding:8px; }
+      .admin-gallery-item span { color:var(--muted); font-size:.7rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+      .icon-button { background:transparent; border:0; color:var(--danger); cursor:pointer; }
+      @media (max-width:650px) { .topbar-inner,.dashboard-head { align-items:flex-start; flex-direction:column; gap:16px; } .content-tools { grid-template-columns:1fr; } .form-grid { grid-template-columns:1fr; } .event-row { align-items:flex-start; flex-direction:column; } .event-row-date { flex-basis:auto; } .event-row-actions { width:100%; } .event-row-actions .btn { flex:1; } main { padding-top:42px; } }
     </style>
   </head>
   <body>
@@ -81,8 +91,8 @@
       <div class="container">
         <div class="page-intro">
           <div class="eyebrow">Website content</div>
-          <h1>Upcoming events</h1>
-          <p>Add a gathering, service, or outreach event here and it will appear automatically in the “Come and be part of it” section on the public website.</p>
+          <h1>Website content</h1>
+          <p>Update the words, images, and events here. Everything you publish will appear automatically on the public Great Light Centre website.</p>
         </div>
 
         <section class="panel login-panel" id="loginPanel">
@@ -97,7 +107,29 @@
         </section>
 
         <section class="dashboard" id="dashboard">
-          <div class="dashboard-head"><h2>Manage events</h2><button class="btn small" id="logoutButton" type="button"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign out</button></div>
+          <div class="dashboard-head"><h2>Manage the website</h2><button class="btn small" id="logoutButton" type="button"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign out</button></div>
+          <div class="content-tools">
+            <form class="panel" id="contentForm">
+              <h2>Verse &amp; encouragement</h2>
+              <div class="field"><label for="verseText">Verse text</label><textarea id="verseText" name="text" required></textarea></div>
+              <div class="field"><label for="verseReference">Reference</label><input id="verseReference" name="reference" required /></div>
+              <div class="field"><label for="verseEncouragement">Encouraging words</label><textarea id="verseEncouragement" name="encouragement" required></textarea></div>
+              <button class="btn gold" type="submit">Update verse <i class="fa-solid fa-check"></i></button>
+              <div class="status" id="contentStatus" role="status"></div>
+            </form>
+            <section class="panel">
+              <h2>Upload a picture</h2>
+              <form id="uploadForm">
+                <div class="field"><label for="uploadTitle">Picture title</label><input id="uploadTitle" name="title" required placeholder="Sunday worship moments" /></div>
+                <div class="field"><label for="uploadAlt">What is in the picture?</label><input id="uploadAlt" name="alt" required placeholder="Pastor Nathan leading worship" /></div>
+                <div class="field"><label for="uploadFile">Choose image</label><input id="uploadFile" name="file" type="file" accept="image/jpeg,image/png,image/webp,image/gif" required /></div>
+                <button class="btn gold" type="submit">Publish picture <i class="fa-solid fa-image"></i></button>
+                <p class="upload-note">Images up to 6 MB. Published pictures appear in the latest moments section.</p>
+                <div class="status" id="uploadStatus" role="status"></div>
+              </form>
+              <div class="admin-gallery" id="adminGallery"></div>
+            </section>
+          </div>
           <form class="panel event-form" id="eventForm">
             <h2 id="formTitle">Add an upcoming event</h2>
             <div class="form-grid">
@@ -126,6 +158,11 @@
       const formTitle = document.getElementById("formTitle");
       const saveButton = document.getElementById("saveButton");
       const cancelButton = document.getElementById("cancelButton");
+      const contentForm = document.getElementById("contentForm");
+      const contentStatus = document.getElementById("contentStatus");
+      const uploadForm = document.getElementById("uploadForm");
+      const uploadStatus = document.getElementById("uploadStatus");
+      const adminGallery = document.getElementById("adminGallery");
       let editingId = "";
       let currentEvents = [];
 
@@ -167,10 +204,31 @@
         currentEvents = (await response.json()).events || [];
         renderEvents();
       }
+      async function loadAdminContent() {
+        const response = await fetch("/api/admin/content");
+        if (!response.ok) throw new Error("Unable to load website content.");
+        const content = await response.json();
+        contentForm.elements.text.value = content.verse?.text || "";
+        contentForm.elements.reference.value = content.verse?.reference || "";
+        contentForm.elements.encouragement.value = content.verse?.encouragement || "";
+        renderAdminGallery(content.gallery || []);
+      }
+      function renderAdminGallery(gallery) {
+        if (!gallery.length) { adminGallery.innerHTML = ""; return; }
+        adminGallery.innerHTML = "";
+        gallery.forEach((image) => {
+          const item = document.createElement("div");
+          item.className = "admin-gallery-item";
+          item.innerHTML = `<img src="${image.src}" alt=""><div><span></span><button class="icon-button" type="button" data-gallery-delete="${image.id}" aria-label="Delete image"><i class="fa-solid fa-trash"></i></button></div>`;
+          item.querySelector("img").alt = image.alt;
+          item.querySelector("span").textContent = image.title;
+          adminGallery.appendChild(item);
+        });
+      }
       function showDashboard() {
         loginPanel.style.display = "none";
         dashboard.classList.add("active");
-        loadAdminEvents().catch((error) => { dashboard.classList.remove("active"); loginPanel.style.display = ""; setStatus(loginStatus, error.message); });
+        Promise.all([loadAdminEvents(), loadAdminContent()]).catch((error) => { dashboard.classList.remove("active"); loginPanel.style.display = ""; setStatus(loginStatus, error.message); });
       }
       fetch("/api/admin/session").then((response) => response.json()).then((result) => { if (result.authenticated) showDashboard(); });
 
@@ -184,6 +242,48 @@
           loginForm.reset();
           showDashboard();
         } catch (error) { setStatus(loginStatus, error.message); }
+      });
+
+      contentForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        clearStatus(contentStatus);
+        try {
+          const response = await fetch("/api/admin/content", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(Object.fromEntries(new FormData(contentForm))) });
+          const result = await response.json();
+          if (!response.ok) throw new Error(result.error || "Unable to update the verse.");
+          setStatus(contentStatus, "Verse and encouragement updated on the website.", "success");
+        } catch (error) { setStatus(contentStatus, error.message); }
+      });
+
+      uploadForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        clearStatus(uploadStatus);
+        const file = document.getElementById("uploadFile").files[0];
+        if (!file) return setStatus(uploadStatus, "Choose an image first.");
+        if (file.size > 6_000_000) return setStatus(uploadStatus, "Images must be smaller than 6 MB.");
+        try {
+          const data = await new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = () => reject(new Error("Unable to read that image."));
+            reader.readAsDataURL(file);
+          });
+          const response = await fetch("/api/admin/upload", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ data, title: uploadForm.elements.title.value, alt: uploadForm.elements.alt.value }) });
+          const result = await response.json();
+          if (!response.ok) throw new Error(result.error || "Unable to upload image.");
+          uploadForm.reset();
+          renderAdminGallery(result.gallery || []);
+          setStatus(uploadStatus, "Picture published to the website.", "success");
+        } catch (error) { setStatus(uploadStatus, error.message); }
+      });
+
+      adminGallery.addEventListener("click", async (event) => {
+        const button = event.target.closest("[data-gallery-delete]");
+        if (!button || !confirm("Remove this picture from the public website?")) return;
+        const response = await fetch(`/api/admin/gallery/${button.dataset.galleryDelete}`, { method: "DELETE" });
+        const result = await response.json();
+        if (response.ok) { renderAdminGallery(result.gallery || []); setStatus(uploadStatus, "Picture removed from the website.", "success"); }
+        else setStatus(uploadStatus, result.error || "Unable to remove picture.");
       });
 
       eventForm.addEventListener("submit", async (event) => {

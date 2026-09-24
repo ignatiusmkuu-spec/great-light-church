@@ -9,9 +9,19 @@ const ROOT = __dirname;
 const DATA_DIR = path.join(ROOT, "data");
 const MESSAGES_FILE = path.join(DATA_DIR, "messages.json");
 const EVENTS_FILE = path.join(DATA_DIR, "events.json");
+const CONTENT_FILE = path.join(DATA_DIR, "site-content.json");
+const UPLOADS_DIR = path.join(ROOT, "attached_assets", "uploads");
 const SESSION_SECRET = process.env.SESSION_SECRET || "";
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "";
+const ADMIN_PASSWORD = (process.env.ADMIN_PASSWORD || "").trim();
 const adminSessions = new Map();
+const DEFAULT_CONTENT = {
+  verse: {
+    text: "The people who walked in darkness have seen a great light; those who dwelt in the land of the shadow of death, upon them a light has shined.",
+    reference: "Isaiah 9:2 · Our foundation",
+    encouragement: "Even in seasons that feel heavy, God is still present, still faithful, and still making a way forward. May His light give you courage for today, peace for tomorrow, and hope that reaches beyond what you can see.",
+  },
+  gallery: [],
+};
 const MIME_TYPES = {
   ".html": "text/html; charset=utf-8",
   ".css": "text/css; charset=utf-8",
@@ -45,12 +55,15 @@ function serveFile(response, requestPath) {
   fs.createReadStream(filePath).pipe(response);
 }
 
-function readRequestBody(request) {
+function readRequestBody(request, maxBytes = 12_000_000) {
   return new Promise((resolve, reject) => {
     let body = "";
     request.on("data", (chunk) => {
       body += chunk;
-      if (body.length > 20_000) request.destroy();
+      if (body.length > maxBytes) {
+        reject(new Error("This upload is too large. Please choose a smaller file."));
+        request.destroy();
+      }
     });
     request.on("end", () => {
       try { resolve(JSON.parse(body || "{}")); } catch { reject(new Error("Please send valid form data.")); }
@@ -72,6 +85,14 @@ function readJsonFile(filePath, fallback) {
 function writeJsonFile(filePath, value) {
   fs.mkdirSync(DATA_DIR, { recursive: true });
   fs.writeFileSync(filePath, JSON.stringify(value, null, 2));
+}
+
+function getContent() {
+  const stored = readJsonFile(CONTENT_FILE, {});
+  return {
+    verse: { ...DEFAULT_CONTENT.verse, ...(stored.verse || {}) },
+    gallery: Array.isArray(stored.gallery) ? stored.gallery : [],
+  };
 }
 
 function getCookie(request, name) {
@@ -186,6 +207,57 @@ async function handleAdminEvent(request, response, eventId = "") {
   return sendJson(response, 405, { error: "Method not allowed" });
 }
 
+async function handleAdminContent(request, response) {
+  if (!isAdmin(request)) return sendUnauthorized(response);
+  const content = getContent();
+  if (request.method === "GET") return sendJson(response, 200, content);
+  const data = await readRequestBody(request);
+  const verse = {
+    text: String(data.text || "").trim(),
+    reference: String(data.reference || "").trim(),
+    encouragement: String(data.encouragement || "").trim(),
+  };
+  if (!verse.text || !verse.reference || !verse.encouragement) return sendJson(response, 400, { error: "Verse, reference, and encouragement are all required." });
+  if (verse.text.length > 800 || verse.reference.length > 120 || verse.encouragement.length > 1200) return sendJson(response, 400, { error: "One of the content fields is too long." });
+  const updated = { ...content, verse };
+  writeJsonFile(CONTENT_FILE, updated);
+  return sendJson(response, 200, updated);
+}
+
+async function handleAdminUpload(request, response) {
+  if (!isAdmin(request)) return sendUnauthorized(response);
+  const data = await readRequestBody(request);
+  const match = String(data.data || "").match(/^data:(image\/(?:jpeg|png|webp|gif));base64,([A-Za-z0-9+/=]+)$/);
+  const title = String(data.title || "").trim();
+  const alt = String(data.alt || title).trim();
+  if (!match || !title || !alt) return sendJson(response, 400, { error: "Please choose an image and provide a title and description." });
+  if (title.length > 120 || alt.length > 180) return sendJson(response, 400, { error: "The image title or description is too long." });
+  const buffer = Buffer.from(match[2], "base64");
+  if (!buffer.length || buffer.length > 6_000_000) return sendJson(response, 400, { error: "Images must be smaller than 6 MB." });
+  const extension = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp", "image/gif": "gif" }[match[1]];
+  const filename = `${crypto.randomUUID()}.${extension}`;
+  fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+  fs.writeFileSync(path.join(UPLOADS_DIR, filename), buffer);
+  const content = getContent();
+  const image = { id: crypto.randomUUID(), title, alt, src: `attached_assets/uploads/${filename}`, uploadedAt: new Date().toISOString() };
+  const updated = { ...content, gallery: [image, ...content.gallery] };
+  writeJsonFile(CONTENT_FILE, updated);
+  return sendJson(response, 201, { image, gallery: updated.gallery });
+}
+
+async function handleAdminGalleryDelete(request, response, imageId) {
+  if (!isAdmin(request)) return sendUnauthorized(response);
+  const content = getContent();
+  const image = content.gallery.find((entry) => entry.id === imageId);
+  if (!image) return sendJson(response, 404, { error: "Image not found." });
+  const relativePath = String(image.src || "").replace(/^attached_assets[\\/]/, "");
+  const imagePath = path.normalize(path.join(ROOT, "attached_assets", relativePath.replace(/^uploads[\\/]/, "uploads/")));
+  if (imagePath.startsWith(UPLOADS_DIR) && fs.existsSync(imagePath)) fs.unlinkSync(imagePath);
+  const gallery = content.gallery.filter((entry) => entry.id !== imageId);
+  writeJsonFile(CONTENT_FILE, { ...content, gallery });
+  return sendJson(response, 200, { gallery });
+}
+
 async function handleContact(request, response) {
   try {
     const data = await readRequestBody(request);
@@ -212,11 +284,21 @@ const server = http.createServer(async (request, response) => {
   const requestUrl = new URL(request.url, `http://${request.headers.host || "localhost"}`);
   if (request.method === "GET" && requestUrl.pathname === "/api/health") return sendJson(response, 200, { ok: true, service: "great-light-centre" });
   if (request.method === "GET" && requestUrl.pathname === "/api/events") return sendJson(response, 200, { events: readJsonFile(EVENTS_FILE, []) });
+  if (request.method === "GET" && requestUrl.pathname === "/api/content") return sendJson(response, 200, getContent());
   if (request.method === "POST" && requestUrl.pathname === "/api/admin/login") {
     try { return handleAdminLogin(request, response, await readRequestBody(request)); } catch (error) { return sendJson(response, 400, { error: error.message }); }
   }
   if (request.method === "POST" && requestUrl.pathname === "/api/admin/logout") return handleAdminLogout(response);
   if (request.method === "GET" && requestUrl.pathname === "/api/admin/session") return sendJson(response, 200, { authenticated: isAdmin(request) });
+  if (requestUrl.pathname === "/api/admin/content") {
+    try { return await handleAdminContent(request, response); } catch (error) { return sendJson(response, 400, { error: error.message || "Unable to update website content." }); }
+  }
+  if (request.method === "POST" && requestUrl.pathname === "/api/admin/upload") {
+    try { return await handleAdminUpload(request, response); } catch (error) { return sendJson(response, 400, { error: error.message || "Unable to upload image." }); }
+  }
+  if (request.method === "DELETE" && requestUrl.pathname.startsWith("/api/admin/gallery/")) {
+    try { return await handleAdminGalleryDelete(request, response, requestUrl.pathname.split("/").pop()); } catch (error) { return sendJson(response, 400, { error: error.message || "Unable to delete image." }); }
+  }
   if (requestUrl.pathname === "/api/admin/events" || requestUrl.pathname.startsWith("/api/admin/events/")) {
     const eventId = requestUrl.pathname.split("/").pop();
     try { return await handleAdminEvent(request, response, eventId === "events" ? "" : eventId); } catch (error) { return sendJson(response, 400, { error: error.message || "Unable to update events." }); }

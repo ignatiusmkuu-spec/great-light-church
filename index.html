@@ -190,6 +190,11 @@
       .gallery-item::after { background: linear-gradient(0deg, rgba(27,12,42,.75), transparent 60%); content: ""; inset: 0; position: absolute; }
       .gallery-label { bottom: 17px; color: white; font-size: .82rem; font-weight: 700; left: 18px; position: absolute; z-index: 1; }
       .gallery-label small { color: var(--gold-light); display: block; font-size: .65rem; font-weight: 500; letter-spacing: .08em; margin-bottom: 2px; text-transform: uppercase; }
+      .uploaded-section { background: var(--cream); display: none; }
+      .uploaded-grid { display: grid; gap: 18px; grid-template-columns: repeat(4, 1fr); }
+      .uploaded-card { background: var(--paper); border-radius: 18px; box-shadow: 0 10px 30px rgba(44,25,64,.08); overflow: hidden; }
+      .uploaded-card img { aspect-ratio: 1.1; object-fit: cover; width: 100%; }
+      .uploaded-card figcaption { color: var(--purple); font-size: .84rem; font-weight: 700; padding: 14px 16px 17px; }
 
       .contact-grid { display: grid; gap: 75px; grid-template-columns: .85fr 1.15fr; }
       .contact-copy h2 { color: var(--purple-deep); font-size: clamp(2.3rem, 4vw, 4rem); line-height: 1.02; margin: 12px 0 22px; }
@@ -198,6 +203,7 @@
       .contact-details li { align-items: center; color: var(--ink-soft); display: flex; font-size: .9rem; gap: 14px; margin: 14px 0; }
       .contact-details i { color: var(--purple); width: 18px; }
       .contact-form { background: white; border: 1px solid var(--line); border-radius: 24px; box-shadow: 0 15px 45px rgba(44,25,64,.07); padding: clamp(24px, 4vw, 42px); }
+      .contact-actions { display: flex; flex-wrap: wrap; gap: 10px; }
       .form-row { display: grid; gap: 16px; grid-template-columns: 1fr 1fr; }
       .field { margin-bottom: 17px; }
       .field label { color: var(--purple); display: block; font-size: .75rem; font-weight: 700; margin-bottom: 7px; }
@@ -246,6 +252,7 @@
         .worship-card { grid-template-columns: 1fr; }
         .pastor-layout { grid-template-columns: 1fr; }
         .pastor-feature { min-height: 450px; }
+        .uploaded-grid { grid-template-columns: repeat(2, 1fr); }
         .quote-side { border-left: 0; border-top: 1px solid rgba(255,255,255,.25); padding-left: 0; padding-top: 24px; }
         .ministry-grid { grid-template-columns: 1fr; }
         .ministry-side, .ministry-main { min-height: 360px; }
@@ -264,6 +271,7 @@
         section { padding: 75px 0; }
         .service-grid, .form-row, .footer-grid { grid-template-columns: 1fr; }
         .gallery { grid-auto-rows: 160px; }
+        .uploaded-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
         .contact-grid { gap: 35px; }
         .footer-bottom { flex-direction: column; gap: 8px; }
       }
@@ -415,8 +423,8 @@
       <section class="quote-section">
         <div class="container quote-inner">
           <div class="reveal"><div class="eyebrow">Our prayer</div><div class="quote-mark">“</div></div>
-          <div class="reveal"><blockquote>“The people who walked in darkness have seen a great light; those who dwelt in the land of the shadow of death, upon them a light has shined.”</blockquote><div class="quote-ref">Isaiah 9:2 · Our foundation</div></div>
-          <div class="quote-side reveal"><strong>You are not walking alone.</strong><span>Even in seasons that feel heavy, God is still present, still faithful, and still making a way forward.</span><p>May His light give you courage for today, peace for tomorrow, and hope that reaches beyond what you can see.</p></div>
+          <div class="reveal"><blockquote id="verseText">“The people who walked in darkness have seen a great light; those who dwelt in the land of the shadow of death, upon them a light has shined.”</blockquote><div class="quote-ref" id="verseReference">Isaiah 9:2 · Our foundation</div></div>
+          <div class="quote-side reveal"><strong>You are not walking alone.</strong><span id="verseEncouragement">Even in seasons that feel heavy, God is still present, still faithful, and still making a way forward. May His light give you courage for today, peace for tomorrow, and hope that reaches beyond what you can see.</span></div>
         </div>
       </section>
 
@@ -455,6 +463,16 @@
         </div>
       </section>
 
+      <section class="uploaded-section" id="uploadedSection">
+        <div class="container">
+          <div class="section-heading">
+            <div><div class="eyebrow">From our latest moments</div><h2>What God is doing among us.</h2></div>
+            <p>Fresh stories and images from the Great Light Centre family.</p>
+          </div>
+          <div class="uploaded-grid" id="uploadedGrid"></div>
+        </div>
+      </section>
+
       <section id="contact">
         <div class="container contact-grid">
           <div class="contact-copy reveal">
@@ -464,6 +482,7 @@
             <ul class="contact-details">
               <li><i class="fa-solid fa-phone"></i><a href="tel:+254722653748">+254 722 653 748</a></li>
               <li><i class="fa-brands fa-whatsapp"></i><a href="https://wa.me/254722653748" target="_blank" rel="noreferrer">Chat with us on WhatsApp</a></li>
+              <li><i class="fa-solid fa-heart"></i><a href="tel:+254724789758">Pastor Jane Wasilwa · +254 724 789 758</a></li>
               <li><i class="fa-solid fa-location-dot"></i><span>Nairobi, Kenya</span></li>
             </ul>
           </div>
@@ -471,7 +490,7 @@
             <div class="form-row"><div class="field"><label for="name">Your name</label><input id="name" name="name" required placeholder="Jane Doe" /></div><div class="field"><label for="email">Email or phone</label><input id="email" name="email" required placeholder="How can we reach you?" /></div></div>
             <div class="field"><label for="message">How can we pray or help?</label><textarea id="message" name="message" required placeholder="Share what is on your heart..."></textarea></div>
             <input name="website" tabindex="-1" autocomplete="off" style="display:none" />
-            <button class="btn btn-primary" type="submit">Send your message <i class="fa-solid fa-paper-plane"></i></button>
+            <div class="contact-actions"><button class="btn btn-primary" type="submit">Send your message <i class="fa-solid fa-paper-plane"></i></button><button class="btn btn-whatsapp" type="button" id="whatsappFormButton"><i class="fa-brands fa-whatsapp"></i> Send via WhatsApp</button></div>
             <p class="form-note">Your message is received privately by the Great Light Centre team.</p>
             <div class="form-status" id="formStatus" role="status"></div>
           </form>
@@ -484,7 +503,7 @@
         <div class="footer-grid">
           <div class="footer-col"><a class="brand" href="#home"><img src="attached_assets/WhatsApp_Image_2026-09-21_at_11.11.57_AM_1790152300387.jpeg" alt="Great Light Centre logo" /><span class="brand-copy"><strong>GREAT LIGHT</strong><span>Centre Ministries</span></span></a><p style="margin-top:18px">A home for faith, hope, and community.</p><div class="socials"><a href="https://wa.me/254722653748" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a><a href="#contact" aria-label="Contact us"><i class="fa-regular fa-envelope"></i></a><a href="#gather" aria-label="Visit us"><i class="fa-solid fa-location-dot"></i></a></div></div>
           <div class="footer-col"><h3>Explore</h3><a href="#about">Our story</a><a href="#gather">Gather with us</a><a href="#events">Upcoming events</a><a href="#worship">Worship</a><a href="#pastor-nathan">Pastor Nathan</a><a href="#ministries">Ministries</a><a href="#impact">Our impact</a></div>
-          <div class="footer-col"><h3>Connect</h3><a href="tel:+254722653748">+254 722 653 748</a><a href="tel:+254724789758">Pastor Nathan: +254 724 789 758</a><a href="https://wa.me/254724789758" target="_blank" rel="noreferrer">Contact Pastor Nathan</a><a href="#contact">Share a prayer request</a></div>
+           <div class="footer-col"><h3>Connect</h3><a href="tel:+254722653748">+254 722 653 748</a><a href="tel:+254724789758">Pastor Jane: +254 724 789 758</a><a href="https://wa.me/254724789758" target="_blank" rel="noreferrer">WhatsApp Pastor Jane</a><a href="#contact">Share a prayer request</a></div>
           <div class="footer-col"><h3>Sunday worship</h3><p>Every Sunday<br />9:00 AM</p><p>Nairobi, Kenya</p><a class="text-link" href="#contact" style="color:var(--gold-light)">Plan your visit <i class="fa-solid fa-arrow-right"></i></a></div>
         </div>
         <div class="footer-bottom"><span>© <span id="year"></span> Great Light Centre Ministries</span><span>Shine in His marvelous light.</span></div>
@@ -549,6 +568,36 @@
       };
       loadEvents();
 
+      const uploadedSection = document.getElementById("uploadedSection");
+      const uploadedGrid = document.getElementById("uploadedGrid");
+      const loadContent = async () => {
+        try {
+          const response = await fetch("/api/content");
+          if (!response.ok) return;
+          const content = await response.json();
+          if (content.verse) {
+            document.getElementById("verseText").textContent = `“${content.verse.text}”`;
+            document.getElementById("verseReference").textContent = content.verse.reference;
+            document.getElementById("verseEncouragement").textContent = content.verse.encouragement;
+          }
+          const gallery = Array.isArray(content.gallery) ? content.gallery : [];
+          if (!gallery.length) return;
+          uploadedSection.style.display = "block";
+          gallery.forEach((image) => {
+            const card = document.createElement("figure");
+            card.className = "uploaded-card reveal visible";
+            card.innerHTML = `<img loading="lazy"><figcaption></figcaption>`;
+            card.querySelector("img").src = image.src;
+            card.querySelector("img").alt = image.alt;
+            card.querySelector("figcaption").textContent = image.title;
+            uploadedGrid.appendChild(card);
+          });
+        } catch {
+          // The static verse remains available if the content service is unavailable.
+        }
+      };
+      loadContent();
+
       const audio = document.getElementById("worshipAudio");
       const playSong = document.getElementById("playSong");
       const songProgress = document.getElementById("songProgress");
@@ -588,6 +637,16 @@
 
       const form = document.getElementById("contactForm");
       const formStatus = document.getElementById("formStatus");
+      document.getElementById("whatsappFormButton").addEventListener("click", () => {
+        const data = Object.fromEntries(new FormData(form));
+        if (!data.name || !data.email || !data.message) {
+          formStatus.className = "form-status error";
+          formStatus.textContent = "Please enter your name, email or phone, and message first.";
+          return;
+        }
+        const message = `Hello Pastor Jane, my name is ${data.name}. My contact is ${data.email}. ${data.message}`;
+        window.open(`https://wa.me/254724789758?text=${encodeURIComponent(message)}`, "_blank", "noopener");
+      });
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
         const button = form.querySelector("button[type=submit]");
