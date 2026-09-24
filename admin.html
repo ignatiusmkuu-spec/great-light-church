@@ -171,6 +171,12 @@
         element.textContent = message;
       }
       function clearStatus(element) { element.className = "status"; element.textContent = ""; }
+      async function readJsonResponse(response) {
+        const body = await response.text();
+        try { return JSON.parse(body || "{}"); } catch {
+          throw new Error(`The admin server returned an unexpected page (HTTP ${response.status}). Please refresh /admin and try again.`);
+        }
+      }
       function localDate(dateValue) {
         return new Date(`${dateValue}T12:00:00`).toLocaleDateString("en-KE", { day: "numeric", month: "short", year: "numeric" });
       }
@@ -236,8 +242,8 @@
         event.preventDefault();
         clearStatus(loginStatus);
         try {
-          const response = await fetch("/api/admin/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ password: new FormData(loginForm).get("password") }) });
-          const result = await response.json();
+          const response = await fetch("/api/admin/login", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ password: new FormData(loginForm).get("password") }) });
+          const result = await readJsonResponse(response);
           if (!response.ok) throw new Error(result.error || "Unable to sign in.");
           loginForm.reset();
           showDashboard();

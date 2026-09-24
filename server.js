@@ -308,6 +308,7 @@ const server = http.createServer(async (request, response) => {
     response.writeHead(204, { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "GET, POST, OPTIONS", "Access-Control-Allow-Headers": "Content-Type" });
     return response.end();
   }
+  if (requestUrl.pathname.startsWith("/api/")) return sendJson(response, 404, { error: "API route not found." });
   if (request.method === "GET") return serveFile(response, decodeURIComponent(requestUrl.pathname === "/admin" ? "/admin.html" : requestUrl.pathname));
   return sendJson(response, 405, { error: "Method not allowed" });
 });
