@@ -208,6 +208,26 @@
       .ministry-side .ministry-caption { bottom: 22px; left: 22px; }
       .ministry-side .ministry-caption h3 { font-size: 1.6rem; }
 
+      /* Church story */
+      .story-section { background: linear-gradient(180deg, var(--cream) 0%, #f5eee2 100%); overflow: hidden; position: relative; }
+      .story-section::before { border: 1px solid rgba(69,36,119,.1); border-radius: 50%; bottom: -210px; content: ""; height: 430px; left: -180px; position: absolute; width: 430px; }
+      .story-section .container { position: relative; z-index: 1; }
+      .story-grid { display: grid; gap: 18px; grid-auto-rows: 210px; grid-template-columns: repeat(12, minmax(0, 1fr)); }
+      .story-card { border-radius: 20px; box-shadow: 0 14px 34px rgba(44,25,64,.1); overflow: hidden; position: relative; }
+      .story-card:nth-child(1) { grid-column: span 7; grid-row: span 2; }
+      .story-card:nth-child(2), .story-card:nth-child(3) { grid-column: span 5; }
+      .story-card:nth-child(4), .story-card:nth-child(5), .story-card:nth-child(6) { grid-column: span 4; }
+      .story-card img { height: 100%; object-fit: cover; transition: transform .7s; width: 100%; }
+      .story-card:nth-child(1) img { object-position: center 27%; }
+      .story-card:nth-child(4) img { object-position: center 35%; }
+      .story-card:nth-child(6) img { object-position: center 50%; }
+      .story-card:hover img { transform: scale(1.05); }
+      .story-card::after { background: linear-gradient(0deg, rgba(25,12,40,.88), transparent 64%); content: ""; inset: 0; position: absolute; }
+      .story-caption { bottom: 0; color: white; left: 0; padding: 36px 18px 18px; position: absolute; right: 0; z-index: 1; }
+      .story-caption small { color: var(--gold-light); display: block; font-size: .63rem; font-weight: 700; letter-spacing: .1em; margin-bottom: 3px; text-transform: uppercase; }
+      .story-caption strong { display: block; font-family: "Playfair Display", Georgia, serif; font-size: clamp(1rem, 1.8vw, 1.35rem); line-height: 1.12; }
+      .story-caption span { color: #eee6f8; display: block; font-size: .72rem; line-height: 1.35; margin-top: 4px; }
+
       /* Impact gallery */
       .impact-section { background: var(--paper); }
       .gallery { display: grid; gap: 16px; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 210px; }
@@ -296,6 +316,9 @@
         .quote-side { border-left: 0; border-top: 1px solid rgba(255,255,255,.25); padding-left: 0; padding-top: 24px; }
         .ministry-grid { grid-template-columns: 1fr; }
         .ministry-side, .ministry-main { min-height: 360px; }
+        .story-grid { grid-auto-rows: 190px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .story-card:nth-child(n) { grid-column: span 1; grid-row: auto; }
+        .story-card:nth-child(1) { grid-column: span 2; grid-row: span 2; }
         .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 190px; }
         .gallery-item:nth-child(1), .gallery-item:nth-child(4) { grid-column: span 1; }
         .footer-grid { grid-template-columns: 1fr 1fr; }
@@ -315,6 +338,8 @@
         .leadership-grid, .leader-support { gap: 10px; grid-template-columns: 1fr; }
         .leader-card { min-height: 310px; }
         .leader-support { margin-top: 10px; }
+        .story-grid { grid-auto-rows: 180px; grid-template-columns: 1fr; }
+        .story-card:nth-child(n), .story-card:nth-child(1) { grid-column: span 1; grid-row: auto; }
         .contact-grid { gap: 35px; }
         .footer-bottom { flex-direction: column; gap: 8px; }
       }
@@ -339,7 +364,7 @@
         <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
         <nav>
           <ul class="nav-links" id="navLinks">
-            <li><a href="#about">Our story</a></li>
+            <li><a href="#story">Our story</a></li>
             <li><a href="#gather">Gather with us</a></li>
             <li><a href="#worship">Worship</a></li>
             <li><a href="#ministries">Ministries</a></li>
@@ -534,6 +559,41 @@
               <img src="attached_assets/WhatsApp_Image_2026-09-21_at_11.23.32_AM_1790152480989.jpeg" alt="Women gathered together during community outreach" loading="lazy" />
               <div class="ministry-caption"><div class="eyebrow">Community</div><h3>Life, shared.</h3><p>We do better together.</p></div>
             </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="story-section" id="story">
+        <div class="container">
+          <div class="section-heading reveal">
+            <div><div class="eyebrow">Our story</div><h2>Grace has been carrying us from the beginning.</h2></div>
+            <p>From our first hired tent to the people serving today, every chapter is a reminder of God’s faithfulness.</p>
+          </div>
+          <div class="story-grid">
+            <figure class="story-card reveal">
+              <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.33.38_AM_1790335897996.jpeg" alt="Pastor Brian Ombete speaking at Great Light Centre" loading="lazy" />
+              <figcaption class="story-caption"><small>Pastoral ministry</small><strong>Pastor Brian Ombete</strong><span>Sharing the Word with faith and courage.</span></figcaption>
+            </figure>
+            <figure class="story-card reveal">
+              <img src="attached_assets/WhatsApp_Image_2026-09-25_at_2.17.15_PM_1790335943746.jpeg" alt="Believing Women Fellowship gathered together" loading="lazy" />
+              <figcaption class="story-caption"><small>Believing Women Fellowship</small><strong>Faith grows in community</strong></figcaption>
+            </figure>
+            <figure class="story-card reveal">
+              <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.27.01_AM_1790336008702.jpeg" alt="Pink and white tent used by Great Light Centre" loading="lazy" />
+              <figcaption class="story-caption"><small>Where it began</small><strong>Our first hired tent</strong></figcaption>
+            </figure>
+            <figure class="story-card reveal">
+              <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.05.36_AM_1790336057570.jpeg" alt="Susan, Director of Finance" loading="lazy" />
+              <figcaption class="story-caption"><small>Finance &amp; stewardship</small><strong>Susan</strong><span>Director of Finance</span></figcaption>
+            </figure>
+            <figure class="story-card reveal">
+              <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.46.39_AM_1790336202399.jpeg" alt="Servant Jane sharing a message at church" loading="lazy" />
+              <figcaption class="story-caption"><small>Servant leadership</small><strong>Servant Jane</strong></figcaption>
+            </figure>
+            <figure class="story-card reveal">
+              <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.42.00_AM_1790336225764.jpeg" alt="Great Light Centre ministry team standing together" loading="lazy" />
+              <figcaption class="story-caption"><small>Our church family</small><strong>Serving together</strong><span>One team, one purpose.</span></figcaption>
+            </figure>
           </div>
         </div>
       </section>
