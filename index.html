@@ -190,11 +190,20 @@
       .gallery-item::after { background: linear-gradient(0deg, rgba(27,12,42,.75), transparent 60%); content: ""; inset: 0; position: absolute; }
       .gallery-label { bottom: 17px; color: white; font-size: .82rem; font-weight: 700; left: 18px; position: absolute; z-index: 1; }
       .gallery-label small { color: var(--gold-light); display: block; font-size: .65rem; font-weight: 500; letter-spacing: .08em; margin-bottom: 2px; text-transform: uppercase; }
-      .uploaded-section { background: var(--cream); display: none; }
-      .uploaded-grid { display: grid; gap: 18px; grid-template-columns: repeat(4, 1fr); }
-      .uploaded-card { background: var(--paper); border-radius: 18px; box-shadow: 0 10px 30px rgba(44,25,64,.08); overflow: hidden; }
-      .uploaded-card img { aspect-ratio: 1.1; object-fit: cover; width: 100%; }
-      .uploaded-card figcaption { color: var(--purple); font-size: .84rem; font-weight: 700; padding: 14px 16px 17px; }
+      .uploaded-section { background: linear-gradient(180deg, var(--cream) 0%, #f5eee2 100%); display: none; overflow: hidden; position: relative; }
+      .uploaded-section::before { border: 1px solid rgba(69,36,119,.1); border-radius: 50%; content: ""; height: 390px; left: -210px; position: absolute; top: 120px; width: 390px; }
+      .uploaded-section .container { position: relative; z-index: 1; }
+      .uploaded-section .section-heading p { max-width: 360px; }
+      .uploaded-grid { display: grid; gap: 18px; grid-template-columns: repeat(12, minmax(0, 1fr)); }
+      .uploaded-card { background: var(--paper); border: 1px solid rgba(69,36,119,.09); border-radius: 20px; box-shadow: 0 14px 34px rgba(44,25,64,.1); min-width: 0; overflow: hidden; position: relative; }
+      .uploaded-card:nth-child(1) { grid-column: span 7; }
+      .uploaded-card:nth-child(2) { grid-column: span 5; }
+      .uploaded-card:nth-child(3) { grid-column: span 5; }
+      .uploaded-card:nth-child(4) { grid-column: span 7; }
+      .uploaded-card img { aspect-ratio: 16 / 10; height: 100%; object-fit: cover; transition: transform .6s; width: 100%; }
+      .uploaded-card:hover img { transform: scale(1.04); }
+      .uploaded-card::after { background: linear-gradient(0deg, rgba(25,12,40,.78), transparent 52%); content: ""; inset: 0; pointer-events: none; position: absolute; }
+      .uploaded-card figcaption { bottom: 0; color: white; font-family: "Playfair Display", Georgia, serif; font-size: clamp(.95rem, 1.5vw, 1.18rem); font-weight: 600; left: 0; padding: 34px 20px 19px; position: absolute; right: 0; z-index: 1; }
 
       .contact-grid { display: grid; gap: 75px; grid-template-columns: .85fr 1.15fr; }
       .contact-copy h2 { color: var(--purple-deep); font-size: clamp(2.3rem, 4vw, 4rem); line-height: 1.02; margin: 12px 0 22px; }
@@ -466,8 +475,8 @@
       <section class="uploaded-section" id="uploadedSection">
         <div class="container">
           <div class="section-heading">
-            <div><div class="eyebrow">From our latest moments</div><h2>What God is doing among us.</h2></div>
-            <p>Fresh stories and images from the Great Light Centre family.</p>
+            <div><div class="eyebrow">Praise &amp; worship</div><h2>Voices lifted. Hearts united.</h2></div>
+            <p>Meet the team serving our church family through music, prayer, and joyful worship.</p>
           </div>
           <div class="uploaded-grid" id="uploadedGrid"></div>
         </div>

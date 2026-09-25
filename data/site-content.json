@@ -4,5 +4,30 @@
     "reference": "Isaiah 9:2 · Our foundation",
     "encouragement": "Even in seasons that feel heavy, God is still present, still faithful, and still making a way forward. May His light give you courage for today, peace for tomorrow, and hope that reaches beyond what you can see."
   },
-  "gallery": []
+  "gallery": [
+    {
+      "id": "praise-worship-white-purple",
+      "src": "attached_assets/WhatsApp_Image_2026-09-25_at_9.34.36_AM_1790335331932.jpeg",
+      "alt": "Praise and worship team leading the congregation in white and purple attire",
+      "title": "Leading with joy"
+    },
+    {
+      "id": "praise-worship-orange-black",
+      "src": "attached_assets/WhatsApp_Image_2026-09-25_at_9.35.17_AM_1790335331934.jpeg",
+      "alt": "Praise and worship team singing together in orange and black",
+      "title": "One sound, one spirit"
+    },
+    {
+      "id": "praise-worship-red-black",
+      "src": "attached_assets/WhatsApp_Image_2026-09-25_at_9.36.32_AM_1790335331935.jpeg",
+      "alt": "Worship team serving together in red and black",
+      "title": "Worship that serves"
+    },
+    {
+      "id": "praise-worship-blue-robes",
+      "src": "attached_assets/WhatsApp_Image_2026-09-25_at_9.39.40_AM_1790335375949.jpeg",
+      "alt": "Praise and worship team gathered in blue choir robes",
+      "title": "Serving with one heart"
+    }
+  ]
 }
