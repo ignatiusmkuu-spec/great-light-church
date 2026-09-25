@@ -157,6 +157,35 @@
       .pastor-shot figcaption { background: linear-gradient(0deg, rgba(25,12,40,.82), transparent); bottom: 0; color: white; font-size: .78rem; left: 0; padding: 35px 16px 15px; position: absolute; right: 0; }
       .pastor-shot figcaption small { color: var(--gold-light); display: block; font-size: .62rem; letter-spacing: .1em; margin-bottom: 2px; text-transform: uppercase; }
 
+      /* Leadership */
+      .leadership-section { background: var(--paper); overflow: hidden; position: relative; }
+      .leadership-section::before { border: 1px solid rgba(69,36,119,.1); border-radius: 50%; content: ""; height: 430px; position: absolute; right: -220px; top: 80px; width: 430px; }
+      .leadership-section .container { position: relative; z-index: 1; }
+      .leadership-layout { display: grid; gap: 20px; grid-template-columns: .84fr 1.16fr; }
+      .leader-feature, .leader-card, .leader-support-card { border-radius: 22px; overflow: hidden; position: relative; }
+      .leader-feature { min-height: 550px; }
+      .leader-feature img, .leader-card img, .leader-support-card img { height: 100%; object-fit: cover; transition: transform .7s; width: 100%; }
+      .leader-feature img { object-position: center 28%; }
+      .leader-feature:hover img, .leader-card:hover img, .leader-support-card:hover img { transform: scale(1.05); }
+      .leader-feature::after, .leader-card::after, .leader-support-card::after { background: linear-gradient(0deg, rgba(25,12,40,.9), rgba(25,12,40,.02) 70%); content: ""; inset: 0; position: absolute; }
+      .leader-feature-caption, .leader-card figcaption, .leader-support-card figcaption { bottom: 0; color: white; left: 0; position: absolute; right: 0; z-index: 1; }
+      .leader-feature-caption { padding: 46px 30px 28px; }
+      .leader-feature-caption .eyebrow, .leader-card figcaption small, .leader-support-card figcaption small { color: var(--gold-light); }
+      .leader-feature-caption h3 { font-family: "Playfair Display", Georgia, serif; font-size: clamp(2rem, 3vw, 3.1rem); line-height: 1.05; margin: 8px 0 6px; }
+      .leader-feature-caption p { color: #e8deed; font-size: .86rem; }
+      .leadership-grid { display: grid; gap: 20px; grid-template-columns: 1fr 1fr; }
+      .leader-card { min-height: 265px; }
+      .leader-card img { aspect-ratio: .94; }
+      .leader-card figcaption { padding: 42px 18px 17px; }
+      .leader-card figcaption small, .leader-support-card figcaption small { display: block; font-size: .62rem; font-weight: 700; letter-spacing: .1em; margin-bottom: 3px; text-transform: uppercase; }
+      .leader-card figcaption strong { display: block; font-family: "Playfair Display", Georgia, serif; font-size: 1.14rem; line-height: 1.15; }
+      .leader-card figcaption span { color: #eee6f8; display: block; font-size: .72rem; line-height: 1.35; margin-top: 4px; }
+      .leader-support { display: grid; gap: 20px; grid-column: 1 / -1; grid-template-columns: 1fr 1fr; margin-top: 20px; }
+      .leader-support-card { min-height: 230px; }
+      .leader-support-card img { aspect-ratio: 1.75; }
+      .leader-support-card figcaption { padding: 36px 18px 16px; }
+      .leader-support-card figcaption strong { font-family: "Playfair Display", Georgia, serif; font-size: 1.08rem; }
+
       .quote-section { background: var(--purple); color: white; overflow: hidden; position: relative; }
       .quote-section::before { border: 1px solid rgba(245,231,188,.18); border-radius: 50%; content: ""; height: 430px; position: absolute; right: -120px; top: -180px; width: 430px; }
       .quote-inner { align-items: center; display: grid; gap: 60px; grid-template-columns: .8fr 1.2fr; position: relative; }
@@ -261,6 +290,8 @@
         .worship-card { grid-template-columns: 1fr; }
         .pastor-layout { grid-template-columns: 1fr; }
         .pastor-feature { min-height: 450px; }
+        .leadership-layout { grid-template-columns: 1fr; }
+        .leader-feature { min-height: 480px; }
         .uploaded-grid { grid-template-columns: repeat(2, 1fr); }
         .quote-side { border-left: 0; border-top: 1px solid rgba(255,255,255,.25); padding-left: 0; padding-top: 24px; }
         .ministry-grid { grid-template-columns: 1fr; }
@@ -281,6 +312,9 @@
         .service-grid, .form-row, .footer-grid { grid-template-columns: 1fr; }
         .gallery { grid-auto-rows: 160px; }
         .uploaded-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+        .leadership-grid, .leader-support { gap: 10px; grid-template-columns: 1fr; }
+        .leader-card { min-height: 310px; }
+        .leader-support { margin-top: 10px; }
         .contact-grid { gap: 35px; }
         .footer-bottom { flex-direction: column; gap: 8px; }
       }
@@ -309,6 +343,7 @@
             <li><a href="#gather">Gather with us</a></li>
             <li><a href="#worship">Worship</a></li>
             <li><a href="#ministries">Ministries</a></li>
+            <li><a href="#leadership">Leadership</a></li>
             <li><a href="#impact">Our impact</a></li>
             <li><a class="admin-link" href="/admin.html"><i class="fa-solid fa-lock"></i> Admin</a></li>
             <li><a class="nav-cta" href="#contact">Prayer &amp; contact <i class="fa-solid fa-arrow-right"></i></a></li>
@@ -424,6 +459,53 @@
               <figure class="pastor-shot reveal"><img src="attached_assets/WhatsApp_Image_2026-09-23_at_12.29.26_PM_1790220478874.jpeg" alt="Woman sharing a message at church" loading="lazy" /><figcaption><small>A word to the church</small>Faith that speaks life</figcaption></figure>
               <figure class="pastor-shot reveal"><img src="attached_assets/WhatsApp_Image_2026-09-23_at_12.32.28_PM_1790220478874.jpeg" alt="Woman singing during worship" loading="lazy" /><figcaption><small>Praise in song</small>Worship from the heart</figcaption></figure>
               <figure class="pastor-shot reveal"><img src="attached_assets/WhatsApp_Image_2026-09-23_at_12.36.45_PM_1790220496174.jpeg" alt="Smiling woman from the Great Light church family" loading="lazy" /><figcaption><small>Our church family</small>Joy looks good on you</figcaption></figure>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="leadership-section" id="leadership">
+        <div class="container">
+          <div class="section-heading reveal">
+            <div><div class="eyebrow">Our leadership</div><h2>Serving with faith, wisdom, and purpose.</h2></div>
+            <p>Meet the leaders helping Great Light Centre care for people, grow the ministry, and serve our community well.</p>
+          </div>
+          <div class="leadership-layout">
+            <article class="leader-feature reveal">
+              <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.06.08_AM_1790335448033.jpeg" alt="Pastor Faith Kisembe" loading="lazy" />
+              <div class="leader-feature-caption">
+                <div class="eyebrow">Pastor</div>
+                <h3>Pastor Faith Kisembe</h3>
+                <p>Leading with prayer, compassion, and a heart for the Great Light Centre family.</p>
+              </div>
+            </article>
+            <div class="leadership-grid">
+              <figure class="leader-card reveal">
+                <img src="attached_assets/WhatsApp_Image_2026-09-25_at_1.51.39_PM_1790335529571.jpeg" alt="Nelson Mayabi" loading="lazy" />
+                <figcaption><small>Director</small><strong>Nelson Mayabi</strong><span>Projects</span></figcaption>
+              </figure>
+              <figure class="leader-card reveal">
+                <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.17.26_AM_1790335596451.jpeg" alt="Sang Cheruyiot" loading="lazy" />
+                <figcaption><small>Director</small><strong>Sang Cheruyiot</strong><span>Outreach &amp; Missions</span></figcaption>
+              </figure>
+              <figure class="leader-card reveal">
+                <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.20.42_AM_1790335673387.jpeg" alt="Nathan Wambua Kiama" loading="lazy" />
+                <figcaption><small>Director</small><strong>Nathan Wambua Kiama</strong><span>Pastoral Action &amp; Administration</span></figcaption>
+              </figure>
+              <figure class="leader-card reveal">
+                <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.24.05_AM_1790335720568.jpeg" alt="Great Light Centre leader speaking at a training session" loading="lazy" />
+                <figcaption><small>Board leadership</small><strong>Chair, Board of Directors</strong><span>Serving the church with wisdom and care</span></figcaption>
+              </figure>
+            </div>
+            <div class="leader-support">
+              <figure class="leader-support-card reveal">
+                <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.39.07_AM_1790335781874.jpeg" alt="Great Light Centre leader working on ministry projects" loading="lazy" />
+                <figcaption><small>Vision in action</small><strong>Building for the future</strong></figcaption>
+              </figure>
+              <figure class="leader-support-card reveal">
+                <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.24.05_AM_1790335720568.jpeg" alt="Great Light Centre leader facilitating a community training session" loading="lazy" />
+                <figcaption><small>Serving together</small><strong>Faith expressed through service</strong></figcaption>
+              </figure>
             </div>
           </div>
         </div>
