@@ -97,6 +97,28 @@
       .text-link { color: var(--purple); display: inline-flex; font-size: .88rem; font-weight: 700; gap: 10px; margin-top: 8px; }
       .text-link i { color: var(--gold); transition: transform .25s; }
       .text-link:hover i { transform: translateX(5px); }
+      .vision-section { background: linear-gradient(180deg, var(--paper) 0%, var(--cream) 100%); overflow: hidden; position: relative; }
+      .vision-section::before { border: 1px solid rgba(214,169,54,.22); border-radius: 50%; content: ""; height: 460px; left: -210px; position: absolute; top: 60px; width: 460px; }
+      .vision-section .container { position: relative; z-index: 1; }
+      .vision-grid { align-items: stretch; display: grid; gap: clamp(28px, 5vw, 72px); grid-template-columns: 1.15fr .85fr; }
+      .vision-photo { border-radius: 30px; box-shadow: var(--shadow); min-height: 570px; overflow: hidden; position: relative; }
+      .vision-photo img { height: 100%; object-fit: cover; transition: transform .8s; width: 100%; }
+      .vision-photo:hover img { transform: scale(1.04); }
+      .vision-photo::after { background: linear-gradient(0deg, rgba(25,12,40,.86), transparent 58%); content: ""; inset: 0; position: absolute; }
+      .vision-photo-caption { bottom: 30px; color: white; left: 30px; max-width: 480px; position: absolute; z-index: 1; }
+      .vision-photo-caption .eyebrow { color: var(--gold-light); }
+      .vision-photo-caption h3 { font-family: "Playfair Display", Georgia, serif; font-size: clamp(2rem, 4vw, 3.6rem); line-height: 1; margin-top: 10px; }
+      .vision-copy { align-self: center; }
+      .vision-copy h2 { color: var(--purple-deep); font-size: clamp(2.2rem, 4vw, 3.8rem); letter-spacing: -.04em; line-height: 1.02; margin: 12px 0 17px; }
+      .vision-copy > p { color: var(--ink-soft); font-size: 1rem; }
+      .vision-principles { display: grid; gap: 14px; margin-top: 27px; }
+      .vision-principle { background: rgba(255,253,248,.9); border: 1px solid var(--line); border-left: 4px solid var(--gold); border-radius: 14px; padding: 17px 19px; }
+      .vision-principle h3 { color: var(--purple); font-family: "Playfair Display", Georgia, serif; font-size: 1.25rem; margin-bottom: 4px; }
+      .vision-principle p { color: var(--ink-soft); font-size: .84rem; }
+      .motivation-read { background: var(--purple-deep); border-radius: 16px; color: white; margin-top: 18px; padding: 19px 21px; }
+      .motivation-read small { color: var(--gold-light); display: block; font-size: .65rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+      .motivation-read strong { display: block; font-family: "Playfair Display", Georgia, serif; font-size: 1.12rem; line-height: 1.2; margin-top: 7px; }
+      .motivation-read p { color: #e8deed; font-size: .78rem; margin-top: 6px; }
 
       .service-section { background: var(--paper); }
       .service-grid { display: grid; gap: 18px; grid-template-columns: repeat(3, 1fr); }
@@ -213,11 +235,25 @@
       .leadership-panel-heading { align-items: end; display: flex; justify-content: space-between; gap: 28px; margin-bottom: 25px; }
       .leadership-panel-heading h3 { color: var(--purple-deep); font-family: "Playfair Display", Georgia, serif; font-size: clamp(1.8rem, 3vw, 2.5rem); line-height: 1.05; margin-top: 8px; }
       .leadership-panel-heading p { color: var(--ink-soft); max-width: 400px; }
-      .leadership-panel.is-active .leader-feature, .leadership-panel.is-active .leader-card, .leadership-panel.is-active .leadership-panel-copy, .leadership-panel.is-active .leadership-panel-heading { animation: leadershipCardIn .6s both; }
+      .leadership-panel.is-active .leader-feature, .leadership-panel.is-active .leader-card, .leadership-panel.is-active .praise-card, .leadership-panel.is-active .leadership-panel-copy, .leadership-panel.is-active .leadership-panel-heading { animation: leadershipCardIn .6s both; }
       .leadership-panel.is-active .leader-card:nth-child(2) { animation-delay: .08s; }
       .leadership-panel.is-active .leader-card:nth-child(3) { animation-delay: .16s; }
       .leadership-panel.is-active .leader-card:nth-child(4) { animation-delay: .24s; }
       .leadership-panel.is-active .leader-card:nth-child(5) { animation-delay: .32s; }
+      .pastor-team-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .praise-grid { display: grid; gap: 16px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .praise-card { background: var(--cream); border: 1px solid var(--line); border-radius: 18px; min-height: 220px; overflow: hidden; position: relative; }
+      .praise-card:nth-child(1), .praise-card:nth-child(4) { grid-column: span 2; }
+      .praise-card:nth-child(7) { grid-column: span 2; }
+      .praise-card img { height: 100%; object-fit: cover; transition: transform .7s; width: 100%; }
+      .praise-card:hover img { transform: scale(1.06); }
+      .praise-card::after { background: linear-gradient(0deg, rgba(25,12,40,.84), transparent 62%); content: ""; inset: 0; pointer-events: none; position: absolute; }
+      .praise-card figcaption { bottom: 0; color: white; font-family: "Playfair Display", Georgia, serif; font-size: 1.06rem; left: 0; padding: 40px 17px 16px; position: absolute; right: 0; z-index: 1; }
+      .praise-card figcaption small { color: var(--gold-light); display: block; font-family: "DM Sans", sans-serif; font-size: .62rem; font-weight: 700; letter-spacing: .1em; margin-bottom: 3px; text-transform: uppercase; }
+      .advisory-text-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .advisory-text-card { background: linear-gradient(145deg, var(--purple-deep), var(--purple)); min-height: 300px; }
+      .advisory-text-card::after { background: radial-gradient(circle at 80% 10%, rgba(245,231,188,.18), transparent 38%), linear-gradient(0deg, rgba(25,12,40,.76), transparent 72%); }
+      .advisory-initials { align-items: center; background: rgba(245,231,188,.16); border: 1px solid rgba(245,231,188,.48); border-radius: 50%; color: var(--gold-light); display: flex; font-family: "Playfair Display", Georgia, serif; font-size: 2.2rem; height: 90px; justify-content: center; left: 28px; position: absolute; top: 28px; width: 90px; z-index: 1; }
       @keyframes leadershipPanelIn { from { opacity: .35; } to { opacity: 1; } }
       @keyframes leadershipCardIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -347,6 +383,12 @@
         .pastor-feature { min-height: 450px; }
         .leadership-layout { grid-template-columns: 1fr; }
         .leader-feature { min-height: 480px; }
+        .vision-grid { grid-template-columns: 1fr; }
+        .vision-photo { min-height: 470px; }
+        .pastor-team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .praise-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .praise-card:nth-child(n) { grid-column: span 1; }
+        .praise-card:nth-child(1), .praise-card:nth-child(4), .praise-card:nth-child(7) { grid-column: span 2; }
         .uploaded-grid { grid-template-columns: repeat(2, 1fr); }
         .quote-side { border-left: 0; border-top: 1px solid rgba(255,255,255,.25); padding-left: 0; padding-top: 24px; }
         .ministry-grid { grid-template-columns: 1fr; }
@@ -370,7 +412,11 @@
         .service-grid, .form-row, .footer-grid { grid-template-columns: 1fr; }
         .gallery { grid-auto-rows: 160px; }
         .uploaded-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+        .vision-photo { min-height: 410px; }
         .leadership-grid, .leader-support { gap: 10px; grid-template-columns: 1fr; }
+        .pastor-team-grid { grid-template-columns: 1fr; }
+        .praise-grid { grid-template-columns: 1fr; }
+        .praise-card:nth-child(n), .praise-card:nth-child(1), .praise-card:nth-child(4), .praise-card:nth-child(7) { grid-column: span 1; }
         .leader-card { min-height: 310px; }
         .leader-support { margin-top: 10px; }
         .advisory-heading { align-items: start; flex-direction: column; gap: 8px; }
@@ -429,9 +475,30 @@
               <a class="btn btn-whatsapp" href="https://wa.me/254722653748?text=Hello%20Great%20Light%20Centre%2C%20I%20would%20like%20to%20know%20more." target="_blank" rel="noreferrer"><i class="fa-brands fa-whatsapp"></i> WhatsApp · +254 722 653 748</a>
               <a class="btn btn-light" href="#contact"><i class="fa-regular fa-heart"></i> Share a prayer request</a>
             </div>
-            <div class="hero-note">
-              <img src="attached_assets/WhatsApp_Image_2026-09-21_at_11.13.03_AM_1790152360398.jpeg" alt="Pastor Jane Wasilwa" />
-              <div><small>Led with love by</small><strong>Pastor Jane Wasilwa</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="vision-section" id="vision">
+        <div class="container">
+          <div class="section-heading reveal">
+            <div><div class="eyebrow">Vision &amp; mission</div><h2>A light that reaches beyond our walls.</h2></div>
+            <p>Our calling is simple: to help people encounter Christ, find belonging, and become a blessing in the world around them.</p>
+          </div>
+          <div class="vision-grid">
+            <figure class="vision-photo reveal">
+              <img src="attached_assets/WhatsApp_Image_2026-09-23_at_11.24.55_AM_1790220478873.jpeg" alt="Great Light Centre Langata church building" />
+              <figcaption class="vision-photo-caption"><div class="eyebrow">Great Light Centre</div><h3>Faith. Hope. Community.</h3></figcaption>
+            </figure>
+            <div class="vision-copy reveal">
+              <div class="eyebrow">Why we gather</div>
+              <h2>Growing people. Serving faithfully.</h2>
+              <p>Every gathering, ministry, and act of care is part of a bigger story: making the light of Christ visible through a welcoming church family.</p>
+              <div class="vision-principles">
+                <article class="vision-principle"><h3>Our vision</h3><p>To be a radiant, Christ-centred community where people grow in faith and live with courage, compassion, and purpose.</p></article>
+                <article class="vision-principle"><h3>Our mission</h3><p>To welcome people into God’s family, equip them to serve, and carry practical hope into every neighbourhood we touch.</p></article>
+              </div>
+              <div class="motivation-read"><small>Motivation read</small><strong>“Let your light shine before others.”</strong><p>When we walk together in faith, even a small act of love can become a bright witness.</p></div>
             </div>
           </div>
         </div>
@@ -536,12 +603,13 @@
             <p>Our board and directors steward the mission of Great Light Centre with faith, accountability, and care.</p>
           </div>
           <div class="leadership-tabs" role="tablist" aria-label="Leadership groups">
-            <button class="leadership-tab is-active" id="tab-chair" type="button" role="tab" aria-selected="true" aria-controls="leadership-chair" data-leadership-tab="leadership-chair"><span>01</span> Chair</button>
-            <button class="leadership-tab" id="tab-directors" type="button" role="tab" aria-selected="false" aria-controls="leadership-directors" data-leadership-tab="leadership-directors"><span>02</span> Directors</button>
-            <button class="leadership-tab" id="tab-advisory" type="button" role="tab" aria-selected="false" aria-controls="leadership-advisory" data-leadership-tab="leadership-advisory"><span>03</span> Advisory team</button>
+            <button class="leadership-tab is-active" id="tab-board" type="button" role="tab" aria-selected="true" aria-controls="leadership-board" data-leadership-tab="leadership-board"><span>01</span> Board of Directors</button>
+            <button class="leadership-tab" id="tab-pastors" type="button" role="tab" aria-selected="false" aria-controls="leadership-pastors" data-leadership-tab="leadership-pastors"><span>02</span> Pastors Team</button>
+            <button class="leadership-tab" id="tab-advisory" type="button" role="tab" aria-selected="false" aria-controls="leadership-advisory" data-leadership-tab="leadership-advisory"><span>03</span> Advisory Team</button>
+            <button class="leadership-tab" id="tab-praise" type="button" role="tab" aria-selected="false" aria-controls="leadership-praise" data-leadership-tab="leadership-praise"><span>04</span> Praise &amp; Worship</button>
           </div>
           <div class="leadership-panels">
-            <section class="leadership-panel is-active" id="leadership-chair" role="tabpanel" aria-labelledby="tab-chair">
+            <section class="leadership-panel is-active" id="leadership-board" role="tabpanel" aria-labelledby="tab-board">
               <div class="leadership-layout">
                 <article class="leader-feature">
                   <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.46.39_AM_1790336202399.jpeg" alt="Jane Nanyama Wasilwa, Chair of the Board of Directors" loading="lazy" />
@@ -552,39 +620,50 @@
                     <p>Providing faithful oversight and helping the church move forward with wisdom and purpose.</p>
                   </div>
                 </article>
-                <div class="leadership-panel-copy">
-                  <div class="eyebrow">Board of Directors</div>
-                  <h3>Steady leadership for a growing church.</h3>
-                  <p>The Chair helps hold the board’s vision together, ensuring every ministry is guided with prayer, accountability, and care.</p>
-                  <div class="leadership-order-note"><span>01</span><div><strong>First in order</strong><small>Chair of the Board of Directors</small></div></div>
+                <div class="leadership-grid">
+                  <figure class="leader-card">
+                    <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.20.42_AM_1790335673387.jpeg" alt="Pastor Nathan Wambua Kiama" loading="lazy" />
+                    <span class="leader-rank">02</span>
+                    <figcaption><small>Director 01</small><strong>Nathan Wambua Kiama</strong><span>Pastoral Action &amp; Administration</span></figcaption>
+                  </figure>
+                  <figure class="leader-card">
+                    <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.05.36_AM_1790336057570.jpeg" alt="Susan Mwendwa, Director of Finance, Procurement and Resource Management" loading="lazy" />
+                    <span class="leader-rank">03</span>
+                    <figcaption><small>Director 02</small><strong>Susan Mwendwa</strong><span>Finance, Procurement &amp; Resource Management</span></figcaption>
+                  </figure>
+                  <figure class="leader-card">
+                    <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.17.26_AM_1790335596451.jpeg" alt="Sang Cheruyiot, Director of Outreach and Missions" loading="lazy" />
+                    <span class="leader-rank">04</span>
+                    <figcaption><small>Director 03</small><strong>Sang Cheruyiot</strong><span>Outreach &amp; Missions</span></figcaption>
+                  </figure>
+                  <figure class="leader-card">
+                    <img src="attached_assets/WhatsApp_Image_2026-09-25_at_1.51.39_PM_1790335529571.jpeg" alt="Nelson Mayabi, Director of Project Planning and Implementation" loading="lazy" />
+                    <span class="leader-rank">05</span>
+                    <figcaption><small>Director 04</small><strong>Nelson Mayabi</strong><span>Project Planning &amp; Implementation</span></figcaption>
+                  </figure>
                 </div>
               </div>
             </section>
-            <section class="leadership-panel" id="leadership-directors" role="tabpanel" aria-labelledby="tab-directors" hidden>
+            <section class="leadership-panel" id="leadership-pastors" role="tabpanel" aria-labelledby="tab-pastors" hidden>
               <div class="leadership-panel-heading">
-                <div><div class="eyebrow">Board of Directors · 01—04</div><h3>Directors serving the mission.</h3></div>
-                <p>Each director leads a specific area of ministry and keeps the work moving forward in order.</p>
+                <div><div class="eyebrow">Pastors team · 01—03</div><h3>Pastors serving with grace.</h3></div>
+                <p>Our pastors teach, pray, care, and help the church family grow in faith and purpose.</p>
               </div>
-              <div class="leadership-grid">
+              <div class="leadership-grid pastor-team-grid">
                 <figure class="leader-card">
-                  <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.20.42_AM_1790335673387.jpeg" alt="Pastor Nathan Wambua Kiama" loading="lazy" />
+                  <img src="attached_assets/WhatsApp_Image_2026-09-26_at_3.39.07_PM_1790427763355.jpeg" alt="Pastor Nathan Kiama sharing a message about preservation through God's aroma" loading="lazy" />
                   <span class="leader-rank">01</span>
-                  <figcaption><small>Director 01</small><strong>Nathan Wambua Kiama</strong><span>Pastoral Action &amp; Administration</span></figcaption>
+                  <figcaption><small>Pastor 01</small><strong>Pastor Nathan Kiama</strong><span>Word, worship, and renewal</span></figcaption>
                 </figure>
                 <figure class="leader-card">
-                  <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.05.36_AM_1790336057570.jpeg" alt="Susan Mwendwa, Director of Finance, Procurement and Resource Management" loading="lazy" />
+                  <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.33.38_AM_1790335897996.jpeg" alt="Pastor Brian Ombete speaking at Great Light Centre" loading="lazy" />
                   <span class="leader-rank">02</span>
-                  <figcaption><small>Director 02</small><strong>Susan Mwendwa</strong><span>Finance, Procurement &amp; Resource Management</span></figcaption>
+                  <figcaption><small>Pastor 02</small><strong>Pastor Brian Ombete</strong><span>Teaching the Word with faith and courage</span></figcaption>
                 </figure>
                 <figure class="leader-card">
-                  <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.17.26_AM_1790335596451.jpeg" alt="Sang Cheruyiot, Director of Outreach and Missions" loading="lazy" />
+                  <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.46.39_AM_1790336202399.jpeg" alt="Pastor Jane Wasilwa sharing a message at church" loading="lazy" />
                   <span class="leader-rank">03</span>
-                  <figcaption><small>Director 03</small><strong>Sang Cheruyiot</strong><span>Outreach &amp; Missions</span></figcaption>
-                </figure>
-                <figure class="leader-card">
-                  <img src="attached_assets/WhatsApp_Image_2026-09-25_at_1.51.39_PM_1790335529571.jpeg" alt="Nelson Mayabi, Director of Project Planning and Implementation" loading="lazy" />
-                  <span class="leader-rank">04</span>
-                  <figcaption><small>Director 04</small><strong>Nelson Mayabi</strong><span>Project Planning &amp; Implementation</span></figcaption>
+                  <figcaption><small>Pastor 03</small><strong>Pastor Jane Wasilwa</strong><span>Prayer, care, and women’s ministry</span></figcaption>
                 </figure>
               </div>
             </section>
@@ -593,17 +672,32 @@
                 <div><div class="eyebrow">Advisory team · 01—02</div><h3>Wise counsel for the journey.</h3></div>
                 <p>Trusted voices who strengthen the church with insight, experience, and encouragement.</p>
               </div>
-              <div class="advisory-grid">
-                <figure class="leader-card advisory-card">
-                  <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.39.07_AM_1790335781874.jpeg" alt="Dr. Salome Wangamati" loading="lazy" />
+              <div class="advisory-grid advisory-text-grid">
+                <figure class="leader-card advisory-card advisory-text-card">
+                  <span class="advisory-initials">SW</span>
                   <span class="leader-rank">01</span>
                   <figcaption><small>Advisory team 01</small><strong>Dr. Salome Wangamati</strong><span>Offering wisdom and guidance to the ministry.</span></figcaption>
                 </figure>
-                <figure class="leader-card advisory-card">
-                  <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.24.05_AM_1790335720568.jpeg" alt="Gladys Amadi" loading="lazy" />
+                <figure class="leader-card advisory-card advisory-text-card">
+                  <span class="advisory-initials">GA</span>
                   <span class="leader-rank">02</span>
                   <figcaption><small>Advisory team 02</small><strong>Gladys Amadi</strong><span>Supporting the church with care and insight.</span></figcaption>
                 </figure>
+              </div>
+            </section>
+            <section class="leadership-panel" id="leadership-praise" role="tabpanel" aria-labelledby="tab-praise" hidden>
+              <div class="leadership-panel-heading">
+                <div><div class="eyebrow">Praise &amp; worship · 01—07</div><h3>Voices lifted. Hearts united.</h3></div>
+                <p>A joyful team serving through music, prayer, and the sound of a church family worshipping together.</p>
+              </div>
+              <div class="praise-grid">
+                <figure class="praise-card"><img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.34.36_AM_1790427570239.jpeg" alt="Praise and worship team singing in white" loading="lazy" /><figcaption><small>Praise &amp; worship 01</small>Serving with one voice</figcaption></figure>
+                <figure class="praise-card"><img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.35.17_AM_1790427570240.jpeg" alt="Praise and worship team singing in orange and black" loading="lazy" /><figcaption><small>Praise &amp; worship 02</small>Joy in every song</figcaption></figure>
+                <figure class="praise-card"><img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.36.32_AM_1790427570241.jpeg" alt="Praise and worship team leading from the stage" loading="lazy" /><figcaption><small>Praise &amp; worship 03</small>Worship that welcomes</figcaption></figure>
+                <figure class="praise-card"><img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.39.40_AM_1790427593713.jpeg" alt="Choir in blue robes worshipping together" loading="lazy" /><figcaption><small>Praise &amp; worship 04</small>Faith in harmony</figcaption></figure>
+                <figure class="praise-card"><img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.06.08_AM_1790427635962.jpeg" alt="Woman from the Great Light worship team" loading="lazy" /><figcaption><small>Praise &amp; worship 05</small>A heart prepared to serve</figcaption></figure>
+                <figure class="praise-card"><img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.42.00_AM_1790427689693.jpeg" alt="Great Light Centre ministry team together" loading="lazy" /><figcaption><small>Praise &amp; worship 06</small>Serving side by side</figcaption></figure>
+                <figure class="praise-card"><img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.39.07_AM_1790427712065.jpeg" alt="Woman serving with wisdom and excellence" loading="lazy" /><figcaption><small>Praise &amp; worship 07</small>Gifts for the house</figcaption></figure>
               </div>
             </section>
           </div>
