@@ -186,6 +186,12 @@
       .leader-support-card img { aspect-ratio: 1.75; }
       .leader-support-card figcaption { padding: 36px 18px 16px; }
       .leader-support-card figcaption strong { font-family: "Playfair Display", Georgia, serif; font-size: 1.08rem; }
+      .advisory-block { margin-top: 56px; }
+      .advisory-heading { align-items: end; display: flex; justify-content: space-between; gap: 30px; margin-bottom: 26px; }
+      .advisory-heading h3 { color: var(--purple-deep); font-family: "Playfair Display", Georgia, serif; font-size: clamp(1.8rem, 3vw, 2.5rem); line-height: 1.05; margin-top: 8px; }
+      .advisory-heading p { color: var(--ink-soft); max-width: 380px; }
+      .advisory-grid { display: grid; gap: 20px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .advisory-card { min-height: 300px; }
 
       .quote-section { background: var(--purple); color: white; overflow: hidden; position: relative; }
       .quote-section::before { border: 1px solid rgba(245,231,188,.18); border-radius: 50%; content: ""; height: 430px; position: absolute; right: -120px; top: -180px; width: 430px; }
@@ -339,6 +345,8 @@
         .leadership-grid, .leader-support { gap: 10px; grid-template-columns: 1fr; }
         .leader-card { min-height: 310px; }
         .leader-support { margin-top: 10px; }
+        .advisory-heading { align-items: start; flex-direction: column; gap: 8px; }
+        .advisory-grid { gap: 10px; grid-template-columns: 1fr; }
         .story-grid { grid-auto-rows: 180px; grid-template-columns: 1fr; }
         .story-card:nth-child(n), .story-card:nth-child(1) { grid-column: span 1; grid-row: auto; }
         .contact-grid { gap: 35px; }
@@ -493,45 +501,57 @@
       <section class="leadership-section" id="leadership">
         <div class="container">
           <div class="section-heading reveal">
-            <div><div class="eyebrow">Our leadership</div><h2>Pastors first. Leaders aligned. One shared purpose.</h2></div>
-            <p>Our pastors, board, and directors serve in order and work together to care for the Great Light Centre family.</p>
+            <div><div class="eyebrow">Board of Directors</div><h2>Leading with wisdom, serving with unity.</h2></div>
+            <p>Our board and directors steward the mission of Great Light Centre with faith, accountability, and care.</p>
           </div>
           <div class="leadership-layout">
             <article class="leader-feature reveal">
-              <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.06.08_AM_1790335448033.jpeg" alt="Pastor Faith Kisembe" loading="lazy" />
+              <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.46.39_AM_1790336202399.jpeg" alt="Jane Nanyama Wasilwa, Chair of the Board of Directors" loading="lazy" />
               <span class="leader-rank">01</span>
               <div class="leader-feature-caption">
-                <div class="eyebrow">Pastor</div>
-                <h3>Pastor Faith Kisembe</h3>
-                <p>Leading with prayer, compassion, and a heart for the Great Light Centre family.</p>
+                <div class="eyebrow">Chair</div>
+                <h3>Jane Nanyama Wasilwa</h3>
+                <p>Providing faithful oversight and helping the church move forward with wisdom and purpose.</p>
               </div>
             </article>
             <div class="leadership-grid">
               <figure class="leader-card reveal">
                 <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.20.42_AM_1790335673387.jpeg" alt="Pastor Nathan Wambua Kiama" loading="lazy" />
                 <span class="leader-rank">02</span>
-                <figcaption><small>Pastor &amp; director</small><strong>Nathan Wambua Kiama</strong><span>Pastoral Action &amp; Administration</span></figcaption>
+                <figcaption><small>Director 01</small><strong>Nathan Wambua Kiama</strong><span>Pastoral Action &amp; Administration</span></figcaption>
               </figure>
               <figure class="leader-card reveal">
-                <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.24.05_AM_1790335720568.jpeg" alt="Chair of the Great Light Centre Board of Directors" loading="lazy" />
+                <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.05.36_AM_1790336057570.jpeg" alt="Susan Mwendwa, Director of Finance, Procurement and Resource Management" loading="lazy" />
                 <span class="leader-rank">03</span>
-                <figcaption><small>Board leadership</small><strong>Chair, Board of Directors</strong><span>Serving the church with wisdom and care</span></figcaption>
+                <figcaption><small>Director 02</small><strong>Susan Mwendwa</strong><span>Finance, Procurement &amp; Resource Management</span></figcaption>
               </figure>
               <figure class="leader-card reveal">
-                <img src="attached_assets/WhatsApp_Image_2026-09-25_at_1.51.39_PM_1790335529571.jpeg" alt="Nelson Mayabi" loading="lazy" />
+                <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.17.26_AM_1790335596451.jpeg" alt="Sang Cheruyiot, Director of Outreach and Missions" loading="lazy" />
                 <span class="leader-rank">04</span>
-                <figcaption><small>Director</small><strong>Nelson Mayabi</strong><span>Projects</span></figcaption>
+                <figcaption><small>Director 03</small><strong>Sang Cheruyiot</strong><span>Outreach &amp; Missions</span></figcaption>
               </figure>
               <figure class="leader-card reveal">
-                <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.17.26_AM_1790335596451.jpeg" alt="Sang Cheruyiot" loading="lazy" />
+                <img src="attached_assets/WhatsApp_Image_2026-09-25_at_1.51.39_PM_1790335529571.jpeg" alt="Nelson Mayabi, Director of Project Planning and Implementation" loading="lazy" />
                 <span class="leader-rank">05</span>
-                <figcaption><small>Director</small><strong>Sang Cheruyiot</strong><span>Outreach &amp; Missions</span></figcaption>
+                <figcaption><small>Director 04</small><strong>Nelson Mayabi</strong><span>Project Planning &amp; Implementation</span></figcaption>
               </figure>
             </div>
-            <div class="leader-support">
-              <figure class="leader-support-card reveal">
-                <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.39.07_AM_1790335781874.jpeg" alt="Great Light Centre leader working on ministry projects" loading="lazy" />
-                <figcaption><small>Beyond the ranked team</small><strong>Building for the future</strong></figcaption>
+          </div>
+          <div class="advisory-block">
+            <div class="advisory-heading reveal">
+              <div><div class="eyebrow">Advisory team</div><h3>Wise counsel for the journey.</h3></div>
+              <p>Trusted voices who strengthen the church with insight, experience, and encouragement.</p>
+            </div>
+            <div class="advisory-grid">
+              <figure class="leader-card advisory-card reveal">
+                <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.39.07_AM_1790335781874.jpeg" alt="Dr. Salome Wangamati" loading="lazy" />
+                <span class="leader-rank">A1</span>
+                <figcaption><small>Advisory team 01</small><strong>Dr. Salome Wangamati</strong><span>Offering wisdom and guidance to the ministry.</span></figcaption>
+              </figure>
+              <figure class="leader-card advisory-card reveal">
+                <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.24.05_AM_1790335720568.jpeg" alt="Gladys Amadi" loading="lazy" />
+                <span class="leader-rank">A2</span>
+                <figcaption><small>Advisory team 02</small><strong>Gladys Amadi</strong><span>Supporting the church with care and insight.</span></figcaption>
               </figure>
             </div>
           </div>
