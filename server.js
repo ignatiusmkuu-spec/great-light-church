@@ -280,7 +280,7 @@ async function handleContact(request, response) {
   }
 }
 
-const server = http.createServer(async (request, response) => {
+async function handleRequest(request, response) {
   const requestUrl = new URL(request.url, `http://${request.headers.host || "localhost"}`);
   if (request.method === "GET" && requestUrl.pathname === "/api/health") return sendJson(response, 200, { ok: true, service: "great-light-centre" });
   if (request.method === "GET" && requestUrl.pathname === "/api/events") return sendJson(response, 200, { events: readJsonFile(EVENTS_FILE, []) });
@@ -311,6 +311,10 @@ const server = http.createServer(async (request, response) => {
   if (requestUrl.pathname.startsWith("/api/")) return sendJson(response, 404, { error: "API route not found." });
   if (request.method === "GET") return serveFile(response, decodeURIComponent(requestUrl.pathname === "/admin" ? "/admin.html" : requestUrl.pathname));
   return sendJson(response, 405, { error: "Method not allowed" });
-});
+}
 
-server.listen(PORT, "0.0.0.0", () => console.log(`Great Light Centre is running on port ${PORT}`));
+module.exports = handleRequest;
+
+if (require.main === module) {
+  http.createServer(handleRequest).listen(PORT, "0.0.0.0", () => console.log(`Great Light Centre is running on port ${PORT}`));
+}

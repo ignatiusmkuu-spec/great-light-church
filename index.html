@@ -22,12 +22,15 @@
         --paper: #fffdf8;
         --line: #e9e0cf;
         --shadow: 0 22px 60px rgba(44, 25, 64, .12);
+        --glow-purple: rgba(111, 70, 194, .35);
+        --glow-gold: rgba(245, 205, 97, .46);
         --radius: 22px;
       }
 
       * { box-sizing: border-box; margin: 0; padding: 0; }
       html { scroll-behavior: smooth; }
-      body { background: var(--cream); color: var(--ink); font-family: "DM Sans", sans-serif; line-height: 1.6; overflow-x: hidden; }
+      body { background: radial-gradient(circle at 12% 12%, rgba(245,231,188,.34), transparent 24rem), radial-gradient(circle at 88% 48%, rgba(111,70,194,.08), transparent 30rem), var(--cream); color: var(--ink); font-family: "DM Sans", sans-serif; line-height: 1.6; overflow-x: hidden; }
+      body::before { background: radial-gradient(circle, rgba(245,231,188,.22) 0, rgba(245,231,188,0) 68%); content: ""; height: 34rem; left: -18rem; pointer-events: none; position: fixed; top: 18rem; width: 34rem; z-index: -1; }
       img { max-width: 100%; display: block; }
       a { color: inherit; text-decoration: none; }
       button, input, textarea { font: inherit; }
@@ -42,10 +45,10 @@
       .topbar strong { color: var(--gold-light); }
       .topbar-links { display: flex; align-items: center; gap: 18px; }
       .topbar a:hover { color: var(--gold-light); }
-      .site-header { background: rgba(251,248,240,.92); backdrop-filter: blur(18px); border-bottom: 1px solid rgba(69,36,119,.1); position: sticky; top: 0; z-index: 20; }
+      .site-header { background: rgba(251,248,240,.88); backdrop-filter: blur(18px); border-bottom: 1px solid rgba(69,36,119,.1); box-shadow: 0 8px 28px rgba(69,36,119,.08), 0 0 20px rgba(245,205,97,.12); position: sticky; top: 0; z-index: 20; }
       .nav-inner { align-items: center; display: flex; justify-content: space-between; min-height: 84px; gap: 30px; }
       .brand { align-items: center; display: flex; gap: 12px; }
-      .brand img { width: 52px; height: 52px; object-fit: contain; border-radius: 50%; }
+      .brand img { width: 52px; height: 52px; object-fit: contain; border-radius: 50%; box-shadow: 0 0 0 3px rgba(245,231,188,.5), 0 0 22px var(--glow-gold); }
       .brand-copy { line-height: 1.05; }
       .brand-copy strong { color: var(--purple); font-size: 1.05rem; letter-spacing: .08em; }
       .brand-copy span { color: var(--ink-soft); display: block; font-size: .66rem; letter-spacing: .16em; margin-top: 6px; text-transform: uppercase; }
@@ -56,14 +59,14 @@
       .nav-links a:hover::after { transform: scaleX(1); }
       .admin-link { color: var(--purple) !important; font-size: .75rem !important; opacity: .7; }
       .nav-cta, .btn { align-items: center; border: 0; border-radius: 100px; cursor: pointer; display: inline-flex; font-weight: 700; gap: 10px; justify-content: center; transition: transform .25s, box-shadow .25s, background .25s; }
-      .nav-cta { background: var(--purple); color: white !important; font-size: .8rem !important; padding: 13px 19px; }
-      .nav-cta:hover, .btn:hover { box-shadow: 0 12px 24px rgba(69,36,119,.2); transform: translateY(-2px); }
+      .nav-cta { background: var(--purple); color: white !important; font-size: .8rem !important; padding: 13px 19px; box-shadow: 0 0 18px rgba(69,36,119,.2); }
+      .nav-cta:hover, .btn:hover { box-shadow: 0 12px 24px rgba(69,36,119,.2), 0 0 24px var(--glow-purple); transform: translateY(-2px); }
       .menu-toggle { background: none; border: 0; color: var(--purple); cursor: pointer; display: none; font-size: 1.5rem; }
 
       /* Hero */
       .hero { min-height: 680px; overflow: hidden; position: relative; }
       .hero::before { background: linear-gradient(90deg, rgba(30,14,46,.93) 0%, rgba(42,21,66,.78) 44%, rgba(42,21,66,.12) 100%), url("attached_assets/WhatsApp_Image_2026-09-21_at_9.28.56_AM_1790152325660.jpeg") center/cover; content: ""; inset: 0; position: absolute; }
-      .hero::after { border: 1px solid rgba(245,231,188,.25); border-radius: 50%; content: ""; height: 480px; position: absolute; right: -100px; top: 70px; width: 480px; }
+      .hero::after { border: 1px solid rgba(245,231,188,.34); border-radius: 50%; box-shadow: 0 0 38px rgba(245,205,97,.2), inset 0 0 38px rgba(245,205,97,.09); content: ""; height: 480px; position: absolute; right: -100px; top: 70px; width: 480px; }
       .hero-inner { align-items: center; display: flex; min-height: 680px; position: relative; z-index: 1; }
       .hero-content { color: white; max-width: 650px; padding: 75px 0; }
       .hero-content .eyebrow { color: var(--gold-light); }
@@ -87,6 +90,8 @@
       .section-heading { align-items: end; display: flex; justify-content: space-between; gap: 30px; margin-bottom: 46px; }
       .section-heading h2 { color: var(--purple-deep); font-size: clamp(2.2rem, 4vw, 3.7rem); letter-spacing: -.04em; line-height: 1.05; margin-top: 12px; max-width: 590px; }
       .section-heading p { color: var(--ink-soft); max-width: 420px; }
+      .section-heading h2 { text-shadow: 0 0 22px rgba(69,36,119,.08); }
+      .eyebrow { text-shadow: 0 0 14px var(--glow-gold); }
       .about-grid { align-items: center; display: grid; gap: clamp(45px, 7vw, 100px); grid-template-columns: 1fr 1fr; }
       .about-photo { border-radius: 28px; box-shadow: var(--shadow); overflow: hidden; position: relative; }
       .about-photo img { aspect-ratio: 4 / 3; object-fit: cover; transition: transform .7s; width: 100%; }
@@ -122,16 +127,16 @@
 
       .service-section { background: var(--paper); }
       .service-grid { display: grid; gap: 18px; grid-template-columns: repeat(3, 1fr); }
-      .service-card { background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; transition: transform .3s, box-shadow .3s; }
-      .service-card:hover { box-shadow: var(--shadow); transform: translateY(-6px); }
-      .service-icon { align-items: center; background: var(--gold-light); border-radius: 50%; color: var(--purple); display: flex; font-size: 1.1rem; height: 45px; justify-content: center; margin-bottom: 24px; width: 45px; }
+      .service-card { background: rgba(255,253,248,.72); border: 1px solid rgba(214,169,54,.24); border-radius: var(--radius); box-shadow: 0 12px 34px rgba(44,25,64,.06), 0 0 16px rgba(245,205,97,.06); padding: 28px; transition: transform .3s, box-shadow .3s, border-color .3s; }
+      .service-card:hover { border-color: rgba(214,169,54,.56); box-shadow: var(--shadow), 0 0 26px rgba(245,205,97,.18); transform: translateY(-6px); }
+      .service-icon { align-items: center; background: var(--gold-light); border-radius: 50%; box-shadow: 0 0 0 5px rgba(245,231,188,.38), 0 0 20px var(--glow-gold); color: var(--purple); display: flex; font-size: 1.1rem; height: 45px; justify-content: center; margin-bottom: 24px; width: 45px; }
       .service-card h3 { color: var(--purple); font-size: 1.12rem; margin-bottom: 8px; }
       .service-card p { color: var(--ink-soft); font-size: .88rem; }
       .service-card .time { color: var(--purple); font-size: .78rem; font-weight: 700; margin-top: 19px; }
       .events-section { background: var(--cream); padding-top: 0; }
       .events-grid { display: grid; gap: 18px; grid-template-columns: repeat(3, 1fr); }
-      .event-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); display: flex; gap: 18px; padding: 22px; transition: transform .3s, box-shadow .3s; }
-      .event-card:hover { box-shadow: var(--shadow); transform: translateY(-5px); }
+      .event-card { background: rgba(255,253,248,.78); border: 1px solid rgba(69,36,119,.14); border-radius: var(--radius); box-shadow: 0 12px 34px rgba(44,25,64,.06), 0 0 16px rgba(111,70,194,.05); display: flex; gap: 18px; padding: 22px; transition: transform .3s, box-shadow .3s, border-color .3s; }
+      .event-card:hover { border-color: rgba(111,70,194,.36); box-shadow: var(--shadow), 0 0 25px rgba(111,70,194,.16); transform: translateY(-5px); }
       .event-date { align-items: center; background: var(--purple); border-radius: 12px; color: white; display: flex; flex-direction: column; flex: 0 0 58px; height: 68px; justify-content: center; line-height: 1; }
       .event-date strong { color: var(--gold-light); font-size: 1.45rem; }
       .event-date span { font-size: .62rem; font-weight: 700; letter-spacing: .1em; margin-top: 5px; text-transform: uppercase; }
@@ -142,7 +147,7 @@
       .event-link { color: var(--purple); display: inline-block; font-size: .75rem; font-weight: 700; margin-top: 8px; }
       .events-empty { background: rgba(245,231,188,.35); border: 1px dashed var(--gold); border-radius: var(--radius); color: var(--ink-soft); padding: 27px; text-align: center; }
       .worship-section { background: var(--paper); padding-top: 0; }
-      .worship-card { align-items: center; background: linear-gradient(120deg, var(--purple-deep), var(--purple)); border-radius: 28px; box-shadow: 0 22px 55px rgba(44,25,64,.18); color: white; display: grid; gap: 36px; grid-template-columns: 1fr auto; overflow: hidden; padding: clamp(28px, 5vw, 54px); position: relative; }
+      .worship-card { align-items: center; background: linear-gradient(120deg, var(--purple-deep), var(--purple)); border: 1px solid rgba(245,231,188,.2); border-radius: 28px; box-shadow: 0 22px 55px rgba(44,25,64,.18), 0 0 36px rgba(111,70,194,.2); color: white; display: grid; gap: 36px; grid-template-columns: 1fr auto; overflow: hidden; padding: clamp(28px, 5vw, 54px); position: relative; }
       .worship-card::after { border: 1px solid rgba(245,231,188,.2); border-radius: 50%; content: ""; height: 270px; position: absolute; right: -85px; top: -100px; width: 270px; }
       .worship-copy, .player { position: relative; z-index: 1; }
       .worship-copy h2 { color: white; font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.05; margin: 10px 0 13px; }
@@ -162,7 +167,7 @@
       .youtube-button:hover { color: white; }
       .pastor-section { background: var(--cream); }
       .pastor-layout { display: grid; gap: 20px; grid-template-columns: .95fr 1.05fr; }
-      .pastor-feature { border-radius: 24px; min-height: 510px; overflow: hidden; position: relative; }
+      .pastor-feature { border: 1px solid rgba(245,231,188,.22); border-radius: 24px; box-shadow: 0 18px 46px rgba(44,25,64,.14), 0 0 28px rgba(111,70,194,.12); min-height: 510px; overflow: hidden; position: relative; }
       .pastor-feature img { height: 100%; object-fit: cover; transition: transform .7s; width: 100%; }
       .pastor-feature:hover img { transform: scale(1.04); }
       .pastor-feature::after { background: linear-gradient(0deg, rgba(25,12,40,.92), rgba(25,12,40,.04) 66%); content: ""; inset: 0; position: absolute; }
@@ -173,7 +178,7 @@
       .pastor-actions { display: flex; flex-wrap: wrap; gap: 9px; }
       .pastor-actions .btn { font-size: .76rem; padding: 11px 15px; }
       .pastor-gallery { display: grid; gap: 20px; grid-template-columns: 1fr 1fr; }
-      .pastor-shot { background: var(--paper); border-radius: 20px; border: 1px solid var(--line); overflow: hidden; position: relative; }
+      .pastor-shot { background: var(--paper); border-radius: 20px; border: 1px solid rgba(214,169,54,.2); box-shadow: 0 12px 30px rgba(44,25,64,.08), 0 0 15px rgba(245,205,97,.06); overflow: hidden; position: relative; }
       .pastor-shot img { aspect-ratio: 1.12; height: 100%; object-fit: cover; transition: transform .6s; width: 100%; }
       .pastor-shot:hover img { transform: scale(1.06); }
       .pastor-shot figcaption { background: linear-gradient(0deg, rgba(25,12,40,.82), transparent); bottom: 0; color: white; font-size: .78rem; left: 0; padding: 35px 16px 15px; position: absolute; right: 0; }
@@ -184,7 +189,7 @@
       .leadership-section::before { border: 1px solid rgba(69,36,119,.1); border-radius: 50%; content: ""; height: 430px; position: absolute; right: -220px; top: 80px; width: 430px; }
       .leadership-section .container { position: relative; z-index: 1; }
       .leadership-layout { display: grid; gap: 20px; grid-template-columns: .84fr 1.16fr; }
-      .leader-feature, .leader-card, .leader-support-card { border-radius: 22px; overflow: hidden; position: relative; }
+      .leader-feature, .leader-card, .leader-support-card { border: 1px solid rgba(245,231,188,.2); border-radius: 22px; box-shadow: 0 15px 38px rgba(44,25,64,.12), 0 0 24px rgba(111,70,194,.1); overflow: hidden; position: relative; }
       .leader-feature { min-height: 550px; }
       .leader-feature img, .leader-card img, .leader-support-card img { height: 100%; object-fit: cover; transition: transform .7s; width: 100%; }
       .leader-feature img { object-position: center 28%; }
@@ -302,11 +307,12 @@
       /* Impact gallery */
       .impact-section { background: var(--paper); }
       .gallery { display: grid; gap: 16px; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 210px; }
-      .gallery-item { border-radius: 16px; cursor: pointer; overflow: hidden; position: relative; }
+      .gallery-item { border: 1px solid rgba(245,231,188,.2); border-radius: 16px; box-shadow: 0 12px 28px rgba(44,25,64,.1), 0 0 18px rgba(111,70,194,.1); cursor: pointer; overflow: hidden; position: relative; transition: box-shadow .3s, transform .3s; }
       .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
       .gallery-item:nth-child(4) { grid-column: span 2; }
       .gallery-item img { height: 100%; object-fit: cover; transition: transform .5s; width: 100%; }
       .gallery-item:hover img { transform: scale(1.08); }
+      .gallery-item:hover { box-shadow: 0 18px 38px rgba(44,25,64,.16), 0 0 28px rgba(245,205,97,.16); transform: translateY(-3px); }
       .gallery-item::after { background: linear-gradient(0deg, rgba(27,12,42,.75), transparent 60%); content: ""; inset: 0; position: absolute; }
       .gallery-label { bottom: 17px; color: white; font-size: .82rem; font-weight: 700; left: 18px; position: absolute; z-index: 1; }
       .gallery-label small { color: var(--gold-light); display: block; font-size: .65rem; font-weight: 500; letter-spacing: .08em; margin-bottom: 2px; text-transform: uppercase; }
@@ -315,13 +321,14 @@
       .uploaded-section .container { position: relative; z-index: 1; }
       .uploaded-section .section-heading p { max-width: 360px; }
       .uploaded-grid { display: grid; gap: 18px; grid-template-columns: repeat(12, minmax(0, 1fr)); }
-      .uploaded-card { background: var(--paper); border: 1px solid rgba(69,36,119,.09); border-radius: 20px; box-shadow: 0 14px 34px rgba(44,25,64,.1); min-width: 0; overflow: hidden; position: relative; }
+      .uploaded-card { background: var(--paper); border: 1px solid rgba(69,36,119,.16); border-radius: 20px; box-shadow: 0 14px 34px rgba(44,25,64,.1), 0 0 18px rgba(111,70,194,.08); min-width: 0; overflow: hidden; position: relative; transition: box-shadow .3s, transform .3s; }
       .uploaded-card:nth-child(1) { grid-column: span 7; }
       .uploaded-card:nth-child(2) { grid-column: span 5; }
       .uploaded-card:nth-child(3) { grid-column: span 5; }
       .uploaded-card:nth-child(4) { grid-column: span 7; }
       .uploaded-card img { aspect-ratio: 16 / 10; height: 100%; object-fit: cover; transition: transform .6s; width: 100%; }
       .uploaded-card:hover img { transform: scale(1.04); }
+      .uploaded-card:hover { box-shadow: 0 20px 42px rgba(44,25,64,.16), 0 0 28px rgba(111,70,194,.17); transform: translateY(-4px); }
       .uploaded-card::after { background: linear-gradient(0deg, rgba(25,12,40,.78), transparent 52%); content: ""; inset: 0; pointer-events: none; position: absolute; }
       .uploaded-card figcaption { bottom: 0; color: white; font-family: "Playfair Display", Georgia, serif; font-size: clamp(.95rem, 1.5vw, 1.18rem); font-weight: 600; left: 0; padding: 34px 20px 19px; position: absolute; right: 0; z-index: 1; }
 
@@ -331,7 +338,7 @@
       .contact-details { list-style: none; margin-top: 32px; }
       .contact-details li { align-items: center; color: var(--ink-soft); display: flex; font-size: .9rem; gap: 14px; margin: 14px 0; }
       .contact-details i { color: var(--purple); width: 18px; }
-      .contact-form { background: white; border: 1px solid var(--line); border-radius: 24px; box-shadow: 0 15px 45px rgba(44,25,64,.07); padding: clamp(24px, 4vw, 42px); }
+      .contact-form { background: rgba(255,255,255,.84); border: 1px solid rgba(214,169,54,.22); border-radius: 24px; box-shadow: 0 15px 45px rgba(44,25,64,.07), 0 0 26px rgba(245,205,97,.09); padding: clamp(24px, 4vw, 42px); }
       .contact-actions { display: flex; flex-wrap: wrap; gap: 10px; }
       .form-row { display: grid; gap: 16px; grid-template-columns: 1fr 1fr; }
       .field { margin-bottom: 17px; }
@@ -365,6 +372,11 @@
       .lightbox button { background: none; border: 0; color: white; cursor: pointer; font-size: 2rem; position: absolute; right: 25px; top: 17px; }
       .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s, transform .7s; }
       .reveal.visible { opacity: 1; transform: translateY(0); }
+      @keyframes softGlow { 0%, 100% { box-shadow: 0 0 0 5px rgba(245,231,188,.32), 0 0 16px rgba(245,205,97,.28); } 50% { box-shadow: 0 0 0 5px rgba(245,231,188,.5), 0 0 28px rgba(245,205,97,.5); } }
+      .service-icon { animation: softGlow 4s ease-in-out infinite; }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+      }
 
       @media (max-width: 800px) {
         .topbar-inner { justify-content: center; }
@@ -612,7 +624,7 @@
             <section class="leadership-panel is-active" id="leadership-board" role="tabpanel" aria-labelledby="tab-board">
               <div class="leadership-layout">
                 <article class="leader-feature">
-                  <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.46.39_AM_1790336202399.jpeg" alt="Jane Nanyama Wasilwa, Chair of the Board of Directors" loading="lazy" />
+                  <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.39.07_AM_1790430724096.jpeg" alt="Jane Nanyama Wasilwa, Chair of the Board of Directors" loading="lazy" />
                   <span class="leader-rank">01</span>
                   <div class="leader-feature-caption">
                     <div class="eyebrow">Chair</div>
@@ -651,19 +663,29 @@
               </div>
               <div class="leadership-grid pastor-team-grid">
                 <figure class="leader-card">
-                  <img src="attached_assets/WhatsApp_Image_2026-09-26_at_3.39.07_PM_1790427763355.jpeg" alt="Pastor Nathan Kiama sharing a message about preservation through God's aroma" loading="lazy" />
+                  <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.06.08_AM_1790430693490.jpeg" alt="Pastor serving at Great Light Centre" loading="lazy" />
                   <span class="leader-rank">01</span>
+                  <figcaption><small>Pastor</small><strong>Pastoral ministry</strong><span>Serving the church with grace</span></figcaption>
+                </figure>
+                <figure class="leader-card">
+                  <img src="attached_assets/WhatsApp_Image_2026-09-26_at_3.39.07_PM_1790427763355.jpeg" alt="Pastor Nathan Kiama sharing a message about preservation through God's aroma" loading="lazy" />
+                  <span class="leader-rank">02</span>
                   <figcaption><small>Pastor 01</small><strong>Pastor Nathan Kiama</strong><span>Word, worship, and renewal</span></figcaption>
                 </figure>
                 <figure class="leader-card">
                   <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.33.38_AM_1790335897996.jpeg" alt="Pastor Brian Ombete speaking at Great Light Centre" loading="lazy" />
-                  <span class="leader-rank">02</span>
+                  <span class="leader-rank">03</span>
                   <figcaption><small>Pastor 02</small><strong>Pastor Brian Ombete</strong><span>Teaching the Word with faith and courage</span></figcaption>
                 </figure>
                 <figure class="leader-card">
                   <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.46.39_AM_1790336202399.jpeg" alt="Pastor Jane Wasilwa sharing a message at church" loading="lazy" />
-                  <span class="leader-rank">03</span>
+                  <span class="leader-rank">04</span>
                   <figcaption><small>Pastor 03</small><strong>Pastor Jane Wasilwa</strong><span>Prayer, care, and women’s ministry</span></figcaption>
+                </figure>
+                <figure class="leader-card">
+                  <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.42.00_AM_1790430897243.jpeg" alt="Lady pastors serving together at Great Light Centre" loading="lazy" />
+                  <span class="leader-rank">05</span>
+                  <figcaption><small>Lady pastors</small><strong>Lady Pastors</strong><span>Serving together in faith and fellowship</span></figcaption>
                 </figure>
               </div>
             </section>
