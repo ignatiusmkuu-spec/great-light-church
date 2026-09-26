@@ -192,6 +192,34 @@
       .advisory-heading p { color: var(--ink-soft); max-width: 380px; }
       .advisory-grid { display: grid; gap: 20px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .advisory-card { min-height: 300px; }
+      .leadership-tabs { border-bottom: 1px solid var(--line); display: flex; gap: 8px; margin: 34px 0 28px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: thin; }
+      .leadership-tab { align-items: center; background: transparent; border: 1px solid transparent; border-radius: 100px; color: var(--ink-soft); cursor: pointer; display: inline-flex; flex: 0 0 auto; font-size: .78rem; font-weight: 700; gap: 9px; padding: 11px 16px; transition: background .25s, color .25s, transform .25s, border-color .25s; }
+      .leadership-tab span { align-items: center; background: var(--gold-light); border-radius: 50%; color: var(--purple-deep); display: inline-flex; font-size: .62rem; height: 24px; justify-content: center; width: 24px; }
+      .leadership-tab:hover { border-color: rgba(69,36,119,.16); color: var(--purple); transform: translateY(-2px); }
+      .leadership-tab.is-active { background: var(--purple); border-color: var(--purple); color: white; box-shadow: 0 10px 24px rgba(69,36,119,.18); }
+      .leadership-tab.is-active span { background: var(--gold); }
+      .leadership-panels { min-height: 565px; }
+      .leadership-panel { padding: 0; }
+      .leadership-panel[hidden] { display: none; }
+      .leadership-panel.is-active { animation: leadershipPanelIn .45s ease both; }
+      .leadership-panel-copy { align-items: flex-start; background: linear-gradient(145deg, var(--purple-deep), var(--purple)); border-radius: 22px; color: white; display: flex; flex-direction: column; justify-content: center; min-height: 550px; padding: clamp(28px, 4vw, 52px); }
+      .leadership-panel-copy .eyebrow { color: var(--gold-light); }
+      .leadership-panel-copy h3 { font-family: "Playfair Display", Georgia, serif; font-size: clamp(1.9rem, 3vw, 3rem); line-height: 1.05; margin: 10px 0 16px; }
+      .leadership-panel-copy p { color: #e8deed; max-width: 430px; }
+      .leadership-order-note { align-items: center; border-top: 1px solid rgba(255,255,255,.22); display: flex; gap: 12px; margin-top: 28px; padding-top: 19px; width: 100%; }
+      .leadership-order-note > span { align-items: center; background: var(--gold); border-radius: 50%; color: var(--purple-deep); display: flex; font-size: .72rem; font-weight: 800; height: 34px; justify-content: center; width: 34px; }
+      .leadership-order-note strong, .leadership-order-note small { display: block; }
+      .leadership-order-note small { color: #e8deed; font-size: .74rem; margin-top: 2px; }
+      .leadership-panel-heading { align-items: end; display: flex; justify-content: space-between; gap: 28px; margin-bottom: 25px; }
+      .leadership-panel-heading h3 { color: var(--purple-deep); font-family: "Playfair Display", Georgia, serif; font-size: clamp(1.8rem, 3vw, 2.5rem); line-height: 1.05; margin-top: 8px; }
+      .leadership-panel-heading p { color: var(--ink-soft); max-width: 400px; }
+      .leadership-panel.is-active .leader-feature, .leadership-panel.is-active .leader-card, .leadership-panel.is-active .leadership-panel-copy, .leadership-panel.is-active .leadership-panel-heading { animation: leadershipCardIn .6s both; }
+      .leadership-panel.is-active .leader-card:nth-child(2) { animation-delay: .08s; }
+      .leadership-panel.is-active .leader-card:nth-child(3) { animation-delay: .16s; }
+      .leadership-panel.is-active .leader-card:nth-child(4) { animation-delay: .24s; }
+      .leadership-panel.is-active .leader-card:nth-child(5) { animation-delay: .32s; }
+      @keyframes leadershipPanelIn { from { opacity: .35; } to { opacity: 1; } }
+      @keyframes leadershipCardIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 
       .quote-section { background: var(--purple); color: white; overflow: hidden; position: relative; }
       .quote-section::before { border: 1px solid rgba(245,231,188,.18); border-radius: 50%; content: ""; height: 430px; position: absolute; right: -120px; top: -180px; width: 430px; }
@@ -347,6 +375,9 @@
         .leader-support { margin-top: 10px; }
         .advisory-heading { align-items: start; flex-direction: column; gap: 8px; }
         .advisory-grid { gap: 10px; grid-template-columns: 1fr; }
+        .leadership-tabs { margin-top: 26px; }
+        .leadership-panel-heading { align-items: start; flex-direction: column; gap: 8px; }
+        .leadership-panels { min-height: 0; }
         .story-grid { grid-auto-rows: 180px; grid-template-columns: 1fr; }
         .story-card:nth-child(n), .story-card:nth-child(1) { grid-column: span 1; grid-row: auto; }
         .contact-grid { gap: 35px; }
@@ -504,56 +535,77 @@
             <div><div class="eyebrow">Board of Directors</div><h2>Leading with wisdom, serving with unity.</h2></div>
             <p>Our board and directors steward the mission of Great Light Centre with faith, accountability, and care.</p>
           </div>
-          <div class="leadership-layout">
-            <article class="leader-feature reveal">
-              <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.46.39_AM_1790336202399.jpeg" alt="Jane Nanyama Wasilwa, Chair of the Board of Directors" loading="lazy" />
-              <span class="leader-rank">01</span>
-              <div class="leader-feature-caption">
-                <div class="eyebrow">Chair</div>
-                <h3>Jane Nanyama Wasilwa</h3>
-                <p>Providing faithful oversight and helping the church move forward with wisdom and purpose.</p>
-              </div>
-            </article>
-            <div class="leadership-grid">
-              <figure class="leader-card reveal">
-                <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.20.42_AM_1790335673387.jpeg" alt="Pastor Nathan Wambua Kiama" loading="lazy" />
-                <span class="leader-rank">02</span>
-                <figcaption><small>Director 01</small><strong>Nathan Wambua Kiama</strong><span>Pastoral Action &amp; Administration</span></figcaption>
-              </figure>
-              <figure class="leader-card reveal">
-                <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.05.36_AM_1790336057570.jpeg" alt="Susan Mwendwa, Director of Finance, Procurement and Resource Management" loading="lazy" />
-                <span class="leader-rank">03</span>
-                <figcaption><small>Director 02</small><strong>Susan Mwendwa</strong><span>Finance, Procurement &amp; Resource Management</span></figcaption>
-              </figure>
-              <figure class="leader-card reveal">
-                <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.17.26_AM_1790335596451.jpeg" alt="Sang Cheruyiot, Director of Outreach and Missions" loading="lazy" />
-                <span class="leader-rank">04</span>
-                <figcaption><small>Director 03</small><strong>Sang Cheruyiot</strong><span>Outreach &amp; Missions</span></figcaption>
-              </figure>
-              <figure class="leader-card reveal">
-                <img src="attached_assets/WhatsApp_Image_2026-09-25_at_1.51.39_PM_1790335529571.jpeg" alt="Nelson Mayabi, Director of Project Planning and Implementation" loading="lazy" />
-                <span class="leader-rank">05</span>
-                <figcaption><small>Director 04</small><strong>Nelson Mayabi</strong><span>Project Planning &amp; Implementation</span></figcaption>
-              </figure>
-            </div>
+          <div class="leadership-tabs" role="tablist" aria-label="Leadership groups">
+            <button class="leadership-tab is-active" id="tab-chair" type="button" role="tab" aria-selected="true" aria-controls="leadership-chair" data-leadership-tab="leadership-chair"><span>01</span> Chair</button>
+            <button class="leadership-tab" id="tab-directors" type="button" role="tab" aria-selected="false" aria-controls="leadership-directors" data-leadership-tab="leadership-directors"><span>02</span> Directors</button>
+            <button class="leadership-tab" id="tab-advisory" type="button" role="tab" aria-selected="false" aria-controls="leadership-advisory" data-leadership-tab="leadership-advisory"><span>03</span> Advisory team</button>
           </div>
-          <div class="advisory-block">
-            <div class="advisory-heading reveal">
-              <div><div class="eyebrow">Advisory team</div><h3>Wise counsel for the journey.</h3></div>
-              <p>Trusted voices who strengthen the church with insight, experience, and encouragement.</p>
-            </div>
-            <div class="advisory-grid">
-              <figure class="leader-card advisory-card reveal">
-                <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.39.07_AM_1790335781874.jpeg" alt="Dr. Salome Wangamati" loading="lazy" />
-                <span class="leader-rank">A1</span>
-                <figcaption><small>Advisory team 01</small><strong>Dr. Salome Wangamati</strong><span>Offering wisdom and guidance to the ministry.</span></figcaption>
-              </figure>
-              <figure class="leader-card advisory-card reveal">
-                <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.24.05_AM_1790335720568.jpeg" alt="Gladys Amadi" loading="lazy" />
-                <span class="leader-rank">A2</span>
-                <figcaption><small>Advisory team 02</small><strong>Gladys Amadi</strong><span>Supporting the church with care and insight.</span></figcaption>
-              </figure>
-            </div>
+          <div class="leadership-panels">
+            <section class="leadership-panel is-active" id="leadership-chair" role="tabpanel" aria-labelledby="tab-chair">
+              <div class="leadership-layout">
+                <article class="leader-feature">
+                  <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.46.39_AM_1790336202399.jpeg" alt="Jane Nanyama Wasilwa, Chair of the Board of Directors" loading="lazy" />
+                  <span class="leader-rank">01</span>
+                  <div class="leader-feature-caption">
+                    <div class="eyebrow">Chair</div>
+                    <h3>Jane Nanyama Wasilwa</h3>
+                    <p>Providing faithful oversight and helping the church move forward with wisdom and purpose.</p>
+                  </div>
+                </article>
+                <div class="leadership-panel-copy">
+                  <div class="eyebrow">Board of Directors</div>
+                  <h3>Steady leadership for a growing church.</h3>
+                  <p>The Chair helps hold the board’s vision together, ensuring every ministry is guided with prayer, accountability, and care.</p>
+                  <div class="leadership-order-note"><span>01</span><div><strong>First in order</strong><small>Chair of the Board of Directors</small></div></div>
+                </div>
+              </div>
+            </section>
+            <section class="leadership-panel" id="leadership-directors" role="tabpanel" aria-labelledby="tab-directors" hidden>
+              <div class="leadership-panel-heading">
+                <div><div class="eyebrow">Board of Directors · 01—04</div><h3>Directors serving the mission.</h3></div>
+                <p>Each director leads a specific area of ministry and keeps the work moving forward in order.</p>
+              </div>
+              <div class="leadership-grid">
+                <figure class="leader-card">
+                  <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.20.42_AM_1790335673387.jpeg" alt="Pastor Nathan Wambua Kiama" loading="lazy" />
+                  <span class="leader-rank">01</span>
+                  <figcaption><small>Director 01</small><strong>Nathan Wambua Kiama</strong><span>Pastoral Action &amp; Administration</span></figcaption>
+                </figure>
+                <figure class="leader-card">
+                  <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.05.36_AM_1790336057570.jpeg" alt="Susan Mwendwa, Director of Finance, Procurement and Resource Management" loading="lazy" />
+                  <span class="leader-rank">02</span>
+                  <figcaption><small>Director 02</small><strong>Susan Mwendwa</strong><span>Finance, Procurement &amp; Resource Management</span></figcaption>
+                </figure>
+                <figure class="leader-card">
+                  <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.17.26_AM_1790335596451.jpeg" alt="Sang Cheruyiot, Director of Outreach and Missions" loading="lazy" />
+                  <span class="leader-rank">03</span>
+                  <figcaption><small>Director 03</small><strong>Sang Cheruyiot</strong><span>Outreach &amp; Missions</span></figcaption>
+                </figure>
+                <figure class="leader-card">
+                  <img src="attached_assets/WhatsApp_Image_2026-09-25_at_1.51.39_PM_1790335529571.jpeg" alt="Nelson Mayabi, Director of Project Planning and Implementation" loading="lazy" />
+                  <span class="leader-rank">04</span>
+                  <figcaption><small>Director 04</small><strong>Nelson Mayabi</strong><span>Project Planning &amp; Implementation</span></figcaption>
+                </figure>
+              </div>
+            </section>
+            <section class="leadership-panel" id="leadership-advisory" role="tabpanel" aria-labelledby="tab-advisory" hidden>
+              <div class="advisory-heading">
+                <div><div class="eyebrow">Advisory team · 01—02</div><h3>Wise counsel for the journey.</h3></div>
+                <p>Trusted voices who strengthen the church with insight, experience, and encouragement.</p>
+              </div>
+              <div class="advisory-grid">
+                <figure class="leader-card advisory-card">
+                  <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.39.07_AM_1790335781874.jpeg" alt="Dr. Salome Wangamati" loading="lazy" />
+                  <span class="leader-rank">01</span>
+                  <figcaption><small>Advisory team 01</small><strong>Dr. Salome Wangamati</strong><span>Offering wisdom and guidance to the ministry.</span></figcaption>
+                </figure>
+                <figure class="leader-card advisory-card">
+                  <img src="attached_assets/WhatsApp_Image_2026-09-25_at_9.24.05_AM_1790335720568.jpeg" alt="Gladys Amadi" loading="lazy" />
+                  <span class="leader-rank">02</span>
+                  <figcaption><small>Advisory team 02</small><strong>Gladys Amadi</strong><span>Supporting the church with care and insight.</span></figcaption>
+                </figure>
+              </div>
+            </section>
           </div>
         </div>
       </section>
@@ -700,6 +752,40 @@
         menuToggle.setAttribute("aria-expanded", "false");
         menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
       }));
+
+      const leadershipTabs = Array.from(document.querySelectorAll(".leadership-tab"));
+      const leadershipPanels = Array.from(document.querySelectorAll(".leadership-panel"));
+      const selectLeadershipPanel = (panelId, shouldFocus = false) => {
+        const selectedTab = leadershipTabs.find((tab) => tab.dataset.leadershipTab === panelId);
+        const selectedPanel = leadershipPanels.find((panel) => panel.id === panelId);
+        if (!selectedTab || !selectedPanel) return;
+        leadershipTabs.forEach((tab) => {
+          const active = tab === selectedTab;
+          tab.classList.toggle("is-active", active);
+          tab.setAttribute("aria-selected", String(active));
+          tab.tabIndex = active ? 0 : -1;
+        });
+        leadershipPanels.forEach((panel) => {
+          const active = panel === selectedPanel;
+          panel.hidden = !active;
+          panel.classList.toggle("is-active", active);
+        });
+        if (shouldFocus) selectedTab.focus();
+      };
+      leadershipTabs.forEach((tab, index) => {
+        tab.addEventListener("click", () => selectLeadershipPanel(tab.dataset.leadershipTab));
+        tab.addEventListener("keydown", (event) => {
+          if (!["ArrowRight", "ArrowLeft", "Home", "End"].includes(event.key)) return;
+          event.preventDefault();
+          const nextIndex = event.key === "Home"
+            ? 0
+            : event.key === "End"
+              ? leadershipTabs.length - 1
+              : (index + (event.key === "ArrowRight" ? 1 : -1) + leadershipTabs.length) % leadershipTabs.length;
+          selectLeadershipPanel(leadershipTabs[nextIndex].dataset.leadershipTab, true);
+        });
+      });
+      if (leadershipTabs.length) selectLeadershipPanel(leadershipTabs.find((tab) => tab.classList.contains("is-active"))?.dataset.leadershipTab || leadershipTabs[0].dataset.leadershipTab);
 
       const revealObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
         if (entry.isIntersecting) { entry.target.classList.add("visible"); revealObserver.unobserve(entry.target); }
