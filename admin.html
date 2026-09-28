@@ -34,6 +34,8 @@
       .login-panel { margin:auto; max-width:520px; }
       .login-panel h2 { font-size:1.8rem; margin-bottom:8px; }
       .helper { color:var(--muted); font-size:.84rem; margin-bottom:22px; }
+      .security-note { align-items:flex-start; background:rgba(245,231,188,.34); border:1px solid rgba(214,169,54,.24); border-radius:12px; color:var(--muted); display:flex; font-size:.76rem; gap:9px; margin:-6px 0 20px; padding:11px 12px; }
+      .security-note i { color:var(--gold); margin-top:3px; }
       .field { margin-bottom:17px; }
       label { color:var(--purple); display:block; font-size:.75rem; font-weight:700; margin-bottom:7px; }
       input,textarea { background:var(--cream); border:1px solid var(--line); border-radius:10px; color:var(--ink); outline:none; padding:12px 13px; width:100%; }
@@ -98,6 +100,7 @@
         <section class="panel login-panel" id="loginPanel">
           <h2>Admin sign in</h2>
           <p class="helper">This area is for the Great Light Centre team. Your password is kept private and is never shown on the website.</p>
+          <div class="security-note"><i class="fa-solid fa-shield-halved"></i><span>Sign-in is managed by the secure deployment settings. The password is never stored in this page or sent to the website.</span></div>
           <form id="loginForm">
             <input name="username" value="admin" autocomplete="username" tabindex="-1" aria-hidden="true" style="display:none" />
             <div class="field"><label for="password">Admin password</label><input id="password" name="password" type="password" required autocomplete="current-password" /></div>

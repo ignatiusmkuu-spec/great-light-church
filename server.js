@@ -13,7 +13,7 @@ const CONTENT_FILE = path.join(DATA_DIR, "site-content.json");
 const UPLOADS_DIR = path.join(ROOT, "attached_assets", "uploads");
 const SESSION_SECRET = process.env.SESSION_SECRET || "";
 const ADMIN_PASSWORD = (process.env.ADMIN_PASSWORD || "").trim();
-const adminSessions = new Map();
+const ADMIN_SESSION_TTL_MS = 8 * 60 * 60 * 1000;
 const DEFAULT_CONTENT = {
   verse: {
     text: "The people who walked in darkness have seen a great light; those who dwelt in the land of the shadow of death, upon them a light has shined.",
@@ -103,25 +103,26 @@ function getCookie(request, name) {
 
 function createAdminSession() {
   const token = crypto.randomBytes(32).toString("hex");
-  const signature = crypto.createHmac("sha256", SESSION_SECRET).update(token).digest("hex");
-  const sessionId = `${token}.${signature}`;
-  adminSessions.set(token, Date.now() + 8 * 60 * 60 * 1000);
-  return sessionId;
+  const expiresAt = Date.now() + ADMIN_SESSION_TTL_MS;
+  const payload = `${token}.${expiresAt}`;
+  const signature = crypto.createHmac("sha256", SESSION_SECRET).update(payload).digest("hex");
+  return `${payload}.${signature}`;
 }
 
 function isAdmin(request) {
   if (!SESSION_SECRET || !ADMIN_PASSWORD) return false;
   const session = getCookie(request, "great_light_admin");
-  const [token, signature] = session.split(".");
-  if (!token || !signature || !adminSessions.has(token)) return false;
-  const expected = crypto.createHmac("sha256", SESSION_SECRET).update(token).digest("hex");
+  const [token, expiresAtText, signature] = session.split(".");
+  const expiresAt = Number(expiresAtText);
+  if (!token || !expiresAtText || !signature || !Number.isSafeInteger(expiresAt) || expiresAt <= Date.now()) return false;
+  const payload = `${token}.${expiresAtText}`;
+  const expected = crypto.createHmac("sha256", SESSION_SECRET).update(payload).digest("hex");
   if (signature.length !== expected.length || !crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expected))) return false;
-  const expiresAt = adminSessions.get(token);
-  if (expiresAt < Date.now()) {
-    adminSessions.delete(token);
-    return false;
-  }
   return true;
+}
+
+function secureCookieFlag(request) {
+  return request.headers["x-forwarded-proto"] === "https" || request.socket.encrypted ? "; Secure" : "";
 }
 
 function compareSecret(input, expected) {
@@ -163,16 +164,16 @@ function handleAdminLogin(request, response, data) {
   response.writeHead(200, {
     "Content-Type": "application/json; charset=utf-8",
     "Cache-Control": "no-store",
-    "Set-Cookie": `great_light_admin=${encodeURIComponent(sessionId)}; HttpOnly; SameSite=Lax; Path=/; Max-Age=28800`,
+    "Set-Cookie": `great_light_admin=${encodeURIComponent(sessionId)}; HttpOnly; SameSite=Lax; Path=/; Max-Age=28800${secureCookieFlag(request)}`,
   });
   return response.end(JSON.stringify({ ok: true }));
 }
 
-function handleAdminLogout(response) {
+function handleAdminLogout(request, response) {
   response.writeHead(200, {
     "Content-Type": "application/json; charset=utf-8",
     "Cache-Control": "no-store",
-    "Set-Cookie": "great_light_admin=; HttpOnly; SameSite=Lax; Path=/; Max-Age=0",
+    "Set-Cookie": `great_light_admin=; HttpOnly; SameSite=Lax; Path=/; Max-Age=0${secureCookieFlag(request)}`,
   });
   return response.end(JSON.stringify({ ok: true }));
 }
@@ -288,7 +289,7 @@ async function handleRequest(request, response) {
   if (request.method === "POST" && requestUrl.pathname === "/api/admin/login") {
     try { return handleAdminLogin(request, response, await readRequestBody(request)); } catch (error) { return sendJson(response, 400, { error: error.message }); }
   }
-  if (request.method === "POST" && requestUrl.pathname === "/api/admin/logout") return handleAdminLogout(response);
+  if (request.method === "POST" && requestUrl.pathname === "/api/admin/logout") return handleAdminLogout(request, response);
   if (request.method === "GET" && requestUrl.pathname === "/api/admin/session") return sendJson(response, 200, { authenticated: isAdmin(request) });
   if (requestUrl.pathname === "/api/admin/content") {
     try { return await handleAdminContent(request, response); } catch (error) { return sendJson(response, 400, { error: error.message || "Unable to update website content." }); }

@@ -104,6 +104,22 @@
       .purpose-card p { color: #ece4f1; font-size: .98rem; line-height: 1.8; max-width: 520px; position: relative; z-index: 1; }
       .purpose-reference { color: var(--gold-light) !important; font-size: .86rem !important; font-weight: 700; letter-spacing: .18em; margin-top: 14px !important; text-transform: uppercase; }
       .purpose-tagline-list { color: #fff8df !important; font-size: .86rem !important; font-weight: 700; line-height: 1.85 !important; margin-top: 16px !important; }
+      @keyframes purposeVisionGlow {
+        0%, 100% { border-color: rgba(245,231,188,.38); box-shadow: 0 0 0 1px rgba(214,169,54,.12), 0 20px 55px rgba(18,6,32,.28), 0 0 18px rgba(245,205,97,.16), inset 0 0 28px rgba(255,255,255,.035); }
+        50% { border-color: rgba(255,240,157,.88); box-shadow: 0 0 0 1px rgba(245,205,97,.32), 0 20px 55px rgba(18,6,32,.28), 0 0 38px rgba(245,205,97,.58), inset 0 0 34px rgba(245,231,188,.12); }
+      }
+      @keyframes purposeMissionGlow {
+        0%, 100% { border-color: rgba(170,132,238,.5); box-shadow: 0 0 0 1px rgba(111,70,194,.18), 0 20px 55px rgba(18,6,32,.28), 0 0 22px rgba(111,70,194,.28), inset 0 0 28px rgba(255,255,255,.035); }
+        50% { border-color: rgba(219,185,255,.92); box-shadow: 0 0 0 1px rgba(167,121,239,.42), 0 20px 55px rgba(18,6,32,.28), 0 0 42px rgba(145,91,232,.68), inset 0 0 34px rgba(196,160,255,.14); }
+      }
+      .purpose-vision-card { animation: purposeVisionGlow 5.5s ease-in-out infinite; }
+      .purpose-mission-card { animation: purposeMissionGlow 6s ease-in-out infinite; animation-delay: -2.1s; }
+      .purpose-vision-card h3, .purpose-mission-card h3 { animation: purposeHeadingShift 5.5s ease-in-out infinite; }
+      .purpose-mission-card h3 { animation-delay: -2.1s; }
+      @keyframes purposeHeadingShift {
+        0%, 100% { color: #fff8df; text-shadow: 0 0 18px rgba(245,231,188,.2); }
+        50% { color: #fff1a7; text-shadow: 0 0 26px rgba(245,205,97,.65); }
+      }
       .section-heading { align-items: end; display: flex; justify-content: space-between; gap: 30px; margin-bottom: 46px; }
       .section-heading h2 { color: var(--purple-deep); font-size: clamp(2.2rem, 4vw, 3.7rem); letter-spacing: -.04em; line-height: 1.05; margin-top: 12px; max-width: 590px; }
       .section-heading p { color: var(--ink-soft); max-width: 420px; }
@@ -502,12 +518,12 @@
             <p class="purpose-reference">Isaiah 9:2</p>
           </div>
           <div class="purpose-grid">
-            <article class="purpose-card">
+            <article class="purpose-card purpose-vision-card">
               <div class="eyebrow">Vision</div>
               <h3>VISION</h3>
               <p>To be a light-bearer of God's truth in a world of darkness, advancing the Kingdom of Jesus Christ through love, discipleship, and transformation.</p>
             </article>
-            <article class="purpose-card">
+            <article class="purpose-card purpose-mission-card">
               <div class="eyebrow">Tag line</div>
               <h3>The Love of Christ, the light of the World.</h3>
               <p class="purpose-tagline-list">Raising Disciples / Transforming Lives / Shining His Light</p>
