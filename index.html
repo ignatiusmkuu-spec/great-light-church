@@ -95,13 +95,15 @@
       .purpose-intro .eyebrow { color: var(--gold-light); }
       .purpose-intro h2 { color: white; font-size: clamp(2.3rem, 5vw, 4.8rem); letter-spacing: -.045em; line-height: 1; margin-top: 14px; text-shadow: 0 0 26px rgba(245,231,188,.18); }
       .purpose-intro p { color: #ded3e8; margin: 18px auto 0; max-width: 590px; }
-      .purpose-grid { display: grid; gap: 20px; grid-template-columns: 1fr 1fr; position: relative; z-index: 1; }
+      .purpose-grid { display: grid; gap: 20px; grid-template-columns: repeat(3, minmax(0, 1fr)); position: relative; z-index: 1; }
       .purpose-card { background: linear-gradient(145deg, rgba(255,255,255,.14), rgba(255,255,255,.055)); border: 1px solid rgba(245,231,188,.35); border-radius: 24px; box-shadow: 0 0 0 1px rgba(214,169,54,.08), 0 20px 55px rgba(18,6,32,.28), inset 0 0 28px rgba(255,255,255,.035); min-height: 250px; padding: clamp(28px, 5vw, 48px); position: relative; transition: transform .3s, box-shadow .3s; }
       .purpose-card::after { background: radial-gradient(circle, rgba(245,231,188,.25), transparent 67%); content: ""; height: 180px; opacity: .65; pointer-events: none; position: absolute; right: -70px; top: -70px; width: 180px; }
       .purpose-card:hover { box-shadow: 0 0 28px rgba(214,169,54,.17), 0 24px 60px rgba(18,6,32,.35); transform: translateY(-5px); }
       .purpose-card .eyebrow { color: var(--gold-light); position: relative; z-index: 1; }
       .purpose-card h3 { color: #fff8df; font-family: "Playfair Display", Georgia, serif; font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.05; margin: 13px 0 17px; position: relative; text-shadow: 0 0 18px rgba(245,231,188,.2); z-index: 1; }
       .purpose-card p { color: #ece4f1; font-size: .98rem; line-height: 1.8; max-width: 520px; position: relative; z-index: 1; }
+      .purpose-reference { color: var(--gold-light) !important; font-size: .86rem !important; font-weight: 700; letter-spacing: .18em; margin-top: 14px !important; text-transform: uppercase; }
+      .purpose-tagline-list { color: #fff8df !important; font-size: .86rem !important; font-weight: 700; line-height: 1.85 !important; margin-top: 16px !important; }
       .section-heading { align-items: end; display: flex; justify-content: space-between; gap: 30px; margin-bottom: 46px; }
       .section-heading h2 { color: var(--purple-deep); font-size: clamp(2.2rem, 4vw, 3.7rem); letter-spacing: -.04em; line-height: 1.05; margin-top: 12px; max-width: 590px; }
       .section-heading p { color: var(--ink-soft); max-width: 420px; }
@@ -495,20 +497,25 @@
       <section class="purpose-section" id="purpose">
         <div class="container">
           <div class="purpose-intro">
-            <div class="eyebrow">Who we are</div>
-            <h2>Carrying the light forward.</h2>
-            <p>Everything we do flows from a clear calling: to make the light of Christ visible in our church, our community, and our world.</p>
+            <div class="eyebrow">Great Light Centre</div>
+            <h2>GREAT LIGHT CHURCH</h2>
+            <p class="purpose-reference">Isaiah 9:2</p>
           </div>
           <div class="purpose-grid">
             <article class="purpose-card">
-              <div class="eyebrow">Our vision</div>
-              <h3>To be a light-bearer.</h3>
+              <div class="eyebrow">Vision</div>
+              <h3>VISION</h3>
               <p>To be a light-bearer of God's truth in a world of darkness, advancing the Kingdom of Jesus Christ through love, discipleship, and transformation.</p>
             </article>
             <article class="purpose-card">
-              <div class="eyebrow">Our mission</div>
-              <h3>Truth in word and deed.</h3>
-              <p>Great Light Center exists to proclaim the gospel of Jesus Christ, to manifest the light of God through word and deed, and to nurture believers into maturity for the glory of God and the good of the world.</p>
+              <div class="eyebrow">Tag line</div>
+              <h3>The Love of Christ, the light of the World.</h3>
+              <p class="purpose-tagline-list">Raising Disciples / Transforming Lives / Shining His Light</p>
+            </article>
+            <article class="purpose-card">
+              <div class="eyebrow">Mission</div>
+              <h3>MISSION</h3>
+              <p>Great light Center exists to proclaim the gospel of Jesus Christ, to manifest the light of God through word and deed, and to nurture believers into maturity for the glory of God and the good of the world.</p>
             </article>
           </div>
         </div>
@@ -528,31 +535,6 @@
             <div class="hero-note">
               <img src="attached_assets/WhatsApp_Image_2026-09-21_at_11.13.03_AM_1790152360398.jpeg" alt="Pastor Jane Wasilwa" />
               <div><small>Led with love by</small><strong>Pastor Jane Wasilwa</strong></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="vision-section" id="vision">
-        <div class="container">
-          <div class="section-heading reveal">
-            <div><div class="eyebrow">Vision &amp; mission</div><h2>A light that reaches beyond our walls.</h2></div>
-            <p>Our calling is simple: to help people encounter Christ, find belonging, and become a blessing in the world around them.</p>
-          </div>
-          <div class="vision-grid">
-            <figure class="vision-photo reveal">
-              <img src="attached_assets/WhatsApp_Image_2026-09-23_at_11.24.55_AM_1790220478873.jpeg" alt="Great Light Centre Langata church building" />
-              <figcaption class="vision-photo-caption"><div class="eyebrow">Great Light Centre</div><h3>Faith. Hope. Community.</h3></figcaption>
-            </figure>
-            <div class="vision-copy reveal">
-              <div class="eyebrow">Why we gather</div>
-              <h2>Growing people. Serving faithfully.</h2>
-              <p>Every gathering, ministry, and act of care is part of a bigger story: making the light of Christ visible through a welcoming church family.</p>
-              <div class="vision-principles">
-                <article class="vision-principle"><h3>Our vision</h3><p>To be a radiant, Christ-centred community where people grow in faith and live with courage, compassion, and purpose.</p></article>
-                <article class="vision-principle"><h3>Our mission</h3><p>To welcome people into God’s family, equip them to serve, and carry practical hope into every neighbourhood we touch.</p></article>
-              </div>
-              <div class="motivation-read"><small>Motivation read</small><strong>“Let your light shine before others.”</strong><p>When we walk together in faith, even a small act of love can become a bright witness.</p></div>
             </div>
           </div>
         </div>
