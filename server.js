@@ -11,8 +11,8 @@ const MESSAGES_FILE = path.join(DATA_DIR, "messages.json");
 const EVENTS_FILE = path.join(DATA_DIR, "events.json");
 const CONTENT_FILE = path.join(DATA_DIR, "site-content.json");
 const UPLOADS_DIR = path.join(ROOT, "attached_assets", "uploads");
-const SESSION_SECRET = process.env.SESSION_SECRET || "jane24";
-const ADMIN_PASSWORD = (process.env.jane23 || "").trim();
+const SESSION_SECRET = process.env.SESSION_SECRET || "pMEUdk5GIdF2x7isLOXfVIcSagbm0Ixqn9HFyguvBnU1wzlbRgqTcafgJUUjn+/TlQhdd26pAFC1HwEvH8yrbw==";
+const ADMIN_PASSWORD = (process.env.jane25 || "").trim();
 const ADMIN_SESSION_TTL_MS = 8 * 60 * 60 * 1000;
 const DEFAULT_CONTENT = {
   verse: {
