@@ -12,7 +12,7 @@ const EVENTS_FILE = path.join(DATA_DIR, "events.json");
 const CONTENT_FILE = path.join(DATA_DIR, "site-content.json");
 const UPLOADS_DIR = path.join(ROOT, "attached_assets", "uploads");
 const SESSION_SECRET = process.env.SESSION_SECRET || "";
-const ADMIN_PASSWORD = (process.env.ADMIN_PASSWORD || "").trim();
+const ADMIN_PASSWORD = (process.env.jane23 || "").trim();
 const ADMIN_SESSION_TTL_MS = 8 * 60 * 60 * 1000;
 const DEFAULT_CONTENT = {
   verse: {
